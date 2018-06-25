@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        
+        <TextView
+                android:id="@+id/dsd_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow_900"
+                android:padding="16dp"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+        
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dsd_title"
+                android:scrollbarStyle="outsideOverlay"
+                android:layout_margin="8dp"
+                >
+                
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        
+                        <TextView
+                                android:id="@+id/dsd_track"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="Trilha:\nQual é a categoria do título"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_panelist"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/dsd_track"
+                                android:layout_marginBottom="8dp"
+                                android:text="Palestrante:\nNome completo do palestrante\nCurriculo"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_local"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/dsd_panelist"
+                                android:layout_marginBottom="8dp"
+                                android:text="Apresentação:\ndia e local da palestra com o tempo de duração"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/dsd_local"
+                                android:layout_marginBottom="8dp"
+                                android:text="Descrição:\ninformação da palestra"
+                                />
+                </RelativeLayout >
+        </ScrollView >
+</RelativeLayout >

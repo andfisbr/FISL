@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/hourrow_back"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="180dp"
+        android:layout_height="220dp"
+        android:layout_marginEnd="0.3dp"
+        android:layout_marginRight="0.3dp"
+        android:layout_marginTop="0.3dp"
+        android:background="@color/colorAccent"
+        android:padding="8dp"
+        >
+
+        <RelativeLayout
+                android:id="@+id/hourrow_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                        android:id="@+id/hourrow_hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hora"
+                        android:textColor="@color/white"
+                        />
+        
+                <TextView
+                        android:id="@+id/hourrow_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hourrow_hour"
+                        android:singleLine="false"
+                        android:text="Título da palestra"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        />
+        
+                <TextView
+                        android:id="@+id/hourrow_panelist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/hourrow_track"
+                        android:text="Palestrante"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        />
+        
+                <TextView
+                        android:id="@+id/hourrow_track"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/colorPrimary"
+                        android:text="Trilha"
+                        android:textColor="@color/white"
+                        />
+        </RelativeLayout >
+        
+        <LinearLayout
+                android:id="@+id/hourrow_free"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sem palestra"
+                        />
+        </LinearLayout >
+</RelativeLayout >
