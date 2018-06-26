@@ -29,6 +29,7 @@ class AgendaRN(var app: FISLApplication) {
                                 }
                                 
                                 val d: Day = Gson().fromJson(result)
+                                
                                 d.items.forEach item@{ item ->
                                         app.agenda.add(item)
 
