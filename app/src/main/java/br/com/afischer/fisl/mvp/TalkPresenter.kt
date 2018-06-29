@@ -1,6 +1,6 @@
 package br.com.afischer.fisl.mvp
 
-import br.com.afischer.fisl.HourFragment
+import br.com.afischer.fisl.TabFragment
 import br.com.afischer.fisl.app.FISLApplication
 import br.com.afischer.fisl.bases.BasePresenter
 import br.com.afischer.fisl.bases.BaseView
@@ -18,7 +18,7 @@ class TalkPresenter: BasePresenter {
         override lateinit var result: FISLResult
         
         private var model: TalkModel = TalkModel(this)
-        private var view: HourFragment? = null
+        private var view: TabFragment? = null
         
         
         
@@ -29,7 +29,7 @@ class TalkPresenter: BasePresenter {
         
         
         override fun attachView(view: BaseView) {
-                this.view = view as HourFragment
+                this.view = view as TabFragment
                 this.app = view.activity!!.application as FISLApplication
         }
         override fun detachView() {

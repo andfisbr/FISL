@@ -1,4 +1,95 @@
 <resources >
         <string name="app_name" >FISL</string >
         <string name="lorem_ipsum" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</string >
+        
+        <array name="spinner_filter" >
+                <item >POR HORA</item >
+                <item >POR TRILHA</item >
+        </array >
+        
+        
+        <string name="about"><![CDATA[
+<h3>18 anos fortalecendo o conhecimento colaborativo e construindo tecnologias livres.</h3>
+<p>A cada ano o Fórum Internacional Software Livre vem se firmando como um local de discussão e exposição das principais novidades e inovações em tecnologias livres.</p>
+<p>Desde a primeira edição, o FISL tem como principal valor "a tecnologia que liberta", incentivando a manutenção da transparência na tecnologia, seja nos códigos, nos padrões abertos, no compartilhamento de conhecimento e na luta pela internet livre e neutra.</p>
+<p>Em 2018 o FISL será novamente o palco do maior encontro de comunidades de Software Livre do mundo. Juntos, iremos compartilhar conhecimentos e inovações, renovar conexões com as comunidades, participar do ecosistema das tecnologias livres e abertas, mas também inquietações em busca do nosso objetivo comum: construir uma humanidade mais justa, colaborativa e com conhecimento livre.</p>
+<br>
+<br>
+<h3>Porque ir</h3>
+<p>O software livre está presente nos negócios, no comércio eletrônico, na educação, na Web, nos dispositivos móveis, na infraestrututa de TI e em tantos outros aspectos da vida moderna.</p>
+<p>Assim sendo, é importante saber quais tecnologias se integram melhor umas com as outras, como os projetos de código aberto que você usa são desenvolvidos e suportados e por quem e entender sobre licenciamento. Nos quatro dias do FISL você encontra:</p>
+<p>
+<b>*</b> Técnicas para escrever o melhor código<br>
+<b>*</b> Vantagens de usar softwares que você pode ter acesso ao código e modificar, se necessário<br>
+<b>*</b> Como participar de uma comunidade<br>
+<b>*</b> Como migrar de instalações comerciais caras para soluções de código aberto mais eficientes e econômicas<br>
+<b>*</b> Inovações na administração de sistemas e em redes que sua organização pode começar a usar imediatamente para aumentar a eficiência<br>
+<b>*</b> Conhecimento para garantir que seu código seja realmente seguro<br>
+<b>*</b> Técnicas fundamentais e dicas avançadas para dimensionar e otimizar seus sistemas com economia de tempo<br>
+<b>*</b> Técnicas para aumentar a produtividade e reduzir o custo de implantação, desde bancos de dados até computação em nuvem<br>
+<b>*</b> Projetos, serviços, linguagens e ferramentas promissores<br>
+<b>*</b> Temas atualizados, como Big Data, Internet das Coisas, Cloud Computing, Inteligência Artificial, Robótica, entre outros.
+</p>
+<br>
+<br>
+<h3>Quem faz o FISL</h3>
+<p>
+COORDENAÇÃO<br>
+<b>*</b> Coordenadores: Sady Jacques, Ricardo Fritsch e Clarisse Abrahão<br>
+<b>*</b> Secretaria Executiva: Luiz Vicente Basso<br>
+<b>*</b> Secretária: Aline Peres<br>
+<br>
+<br>
+GRUPOS DE TRABALHO<br>
+<b>*</b> Coord. GT Captação: Ricardo Fritsch<br>
+<b>*</b> Coord. GT Temário: Daniel Muller<br>
+<b>*</b> Coord. GT Web: Alexandre Thomé<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Conteúdos: Aline Peres<br>
+<b>*</b> Coord. GT Páginas Amigas: Oscar Luz<br>
+<b>*</b> Coord. GT Fislinho: Carlos Castro<br>
+<b>*</b> Coord. GT Acessibilidade: José Francisco<br>
+<b>*</b> Coord. GT Comunicação: João Fernando C. Jr.<br>
+<b>*</b> Coord. GT Comunidades: Thiago Paixão<br>
+<b>*</b> Coord. GT Cultura: Lucas Alberto<br>
+<b>*</b> Coord. GT Educação: Clarisse Abrahão<br>
+<b>*</b> Coord. GT Empreendedorismo: Fabrício Reis<br>
+<b>*</b> Coord. GT Games: Leandro Piccini<br>
+<b>*</b> Coord. GT Infra: Thomas Soares<br>
+<b>*</b> Coord. GT Inscrições:<br>
+<b>*</b> Coord. GT Mobile/IOT:<br>
+<b>*</b> Coord. GT Mulheres: Rafaela Melo<br>
+<b>*</b> Coord. GT RISoL: Laura Marotias<br>
+<b>*</b> Coord. GT Robótica: Eloir Rockenbach<br>
+<b>*</b> Coord. GT Setor Público: Sady Jacques<br>
+<b>*</b> Coord. GT Traduções: Aline Peres<br>
+<b>*</b> Coord. GT Turismo: Aline Peres<br>
+<b>*</b> Coord. GT Voluntários: Junior Goergen<br>
+<b>*</b> Coord. GT WSL: Cláudia Archer<br>
+<br>
+<br>
+OUTROS CONTATOS<br>
+<b>*</b> Inscrições, empenhos e pagamentos: inscricoes ARROBA asl PONTO org PONTO br<br>
+<br>
+<br>
+ASSESSORIAS<br>
+<br>
+<strong>Agência de Eventos</strong><br>
+LB Produções e Eventos<br>
+Fone: (51) 3093-2777 – (51) 3094-2777<br>
+E-mail: fisl ARROBA luizbasso PONTO com PONTO br<br>
+<br>
+<br>
+<strong>Assessoria Contábil</strong><br>
+Espaço de Projetos<br>
+Fone: (51) 3029-9398<br>
+E-mail: fisl ARROBA espacodeprojetos PONTO com PONTO br<br>
+<br>
+<br>
+<strong>Infra-estrutura e TV Software Livre</strong><br>
+Solis – Cooperativa de Soluções Livres<br>
+Fone: (51) 3714-6653<br>
+E-mail: comercial ARROBA solis PONTO coop PONTO br<br>
+</p>
+]]>
+        </string>
 </resources >

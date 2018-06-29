@@ -4,25 +4,36 @@ import android.os.Bundle
 import br.com.afischer.fisl.adapters.PagerAdapter
 import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.enums.ResultType
-import br.com.afischer.fisl.extensions.pad
+import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
+import br.com.afischer.fisl.extensions.tuc
 import br.com.afischer.fisl.models.AgendaRN
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundResource
 
 
-
-
-
-
 class AgendaActivity: ParentActivity(), BaseView {
+        
+        private var pagerAdapter: PagerAdapter? = null
+        
+        
+        
+        
+        
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 setContentView(R.layout.activity_agenda)
         
+                
+                
+                changeButtonsBackground()
+                
+                
                 
                 agenda_back.setOnClickListener {
                         finish()
@@ -45,39 +56,84 @@ class AgendaActivity: ParentActivity(), BaseView {
                         app.day = "14"
                         onDayButtonClick()
                 }
+        
+        
+        
+        
+
+                
+                
+                pagerAdapter = PagerAdapter(supportFragmentManager)
+                agenda_pager.adapter = pagerAdapter
+
+                
+        
+                
+                if (app.filter.isNotEmpty()) {
+                        agenda_filter.text = app.filter
+                }
+        
+                agenda_filter.setOnClickListener {
+                        if (agenda_filter.text != "TODAS" ) {
+                                agenda_filter.text = "TODAS"
+                                app.filter = ""
+                        }
+                        agenda_filter.isEnabled = false
+
+                        updateAgenda()
+                }
                 
                 
                 
-                onDayButtonClick()
-                setupAgenda()
+                
+                
+                updateAgenda()
+
         }
         
+        
+        override fun onStart() {
+                super.onStart()
+                EventBus.getDefault().register(this)
+        }
+        
+        override fun onStop() {
+                EventBus.getDefault().unregister(this)
+                super.onStop()
+        }
+        
+        
+        
+        
 
-        
-        
-        
-
-        
-        private fun onDayButtonClick() {
+        private fun changeButtonsBackground() {
                 agenda_day11.backgroundResource = R.drawable.ic_circle_whitesmoke
                 agenda_day12.backgroundResource = R.drawable.ic_circle_whitesmoke
                 agenda_day13.backgroundResource = R.drawable.ic_circle_whitesmoke
                 agenda_day14.backgroundResource = R.drawable.ic_circle_whitesmoke
-                
+        
                 when (app.day) {
                         "11" -> agenda_day11.backgroundResource = R.drawable.ic_circle_green
                         "12" -> agenda_day12.backgroundResource = R.drawable.ic_circle_green
                         "13" -> agenda_day13.backgroundResource = R.drawable.ic_circle_green
                         "14" -> agenda_day14.backgroundResource = R.drawable.ic_circle_green
                 }
+        }
         
-                setupAgenda()
+        private fun onDayButtonClick() {
+                changeButtonsBackground()
+                initAgenda()
         }
         
         
         
         
-        private fun setupAgenda() {
+
+        
+
+
+
+        private fun initAgenda() {
                 progressShow()
         
                 launch(UI) {
@@ -93,40 +149,95 @@ class AgendaActivity: ParentActivity(), BaseView {
                 }
         }
         
+        
+        
+        
         fun updateAgenda() {
-                val hours = mutableListOf<String>()
-                
-                (8..20).forEach {
-                        hours.add("${it.pad("<00")}:00")
-                        //hours.add("${it.pad("<00")}:20")
-                        //hours.add("${it.pad("<00")}:40")
+        
+                /**
+                 * obtém as trilhas da agenda antes do filtro
+                 */
+                app.agenda.forEach {
+                        it.talk?.let { talk ->
+                                if (!app.tracks.contains(talk.track)) {
+                                        app.tracks.add(talk.track)
+                                }
+                        }
                 }
+        
+                
+                
+                
+                /**
+                 * filtra pela trilha escolhida
+                 */
+                app.aux.clear()
+                if (app.filter.isNotEmpty()) {
+                        app.agenda.forEach {  item ->
+                                item.talk?.let {
+                                        if (it.track == app.filter) {
+                                                app.aux.add(item)
+                                        }
+                                }
+                        }
+                
+                } else {
+                        app.aux.addAll(app.agenda)
+                }
+        
+        
+                
+                
+                
+                /**
+                 * monta as tabs das horas baseado no conteúdo filtrado
+                 */
+                val tabs = mutableListOf<String>()
+                app.aux.map {
+                        it.begins.split("T")[1]
+                }.distinct().sorted().toMutableList().forEach {
+                        tabs.add(it.slice(0..4))
+                }
+        
+        
+                
+                
+                
+                /**
+                 * cria uma página no viewpager pra cada tab
+                 */
+                pagerAdapter?.fragmentList?.clear()
+                pagerAdapter?.fragmentTitleList?.clear()
+                tabs.forEach {
+                        pagerAdapter?.addFragment(TabFragment.newInstance(it), it)
+                }
+                pagerAdapter?.notifyDataSetChanged()
                 
 
-                val adapter = PagerAdapter(supportFragmentManager)
-                hours.forEach {
-                        adapter.addFragment(HourFragment.newInstance(it), it)
-                }
 
-                agenda_pager.adapter = adapter
+                agenda_pager.currentItem = 0
+                
+                
                 agenda_tabs.setupWithViewPager(agenda_pager)
                 
 
-
-                // Iterate over all tabs and set the custom view
-                //(0 until agenda_tabs.tabCount).forEach {
-                //        val tab = agenda_tabs.getTabAt(it)
-                //        tab?.customView = adapter.getTabView(this, tab!!.text.toString())
-                //
-                //        if (!tab.text.toString().contains(":00")) {
-                //                val layout = tab.customView as LinearLayout
-                //                val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
-                //                layoutParams.weight = 0.3f
-                //                layout.layoutParams = layoutParams
-                //        }
-                //}
-        
-
+                
+                
+                
                 progressHide()
+        }
+        
+        
+        
+        
+        
+        
+        
+        @Subscribe fun onEvent(event: AgendaActivity_OnAgendaFilter) {
+                agenda_filter.text = app.filter.split(" - ")[1].tuc()
+                agenda_filter.isEnabled = true
+                
+                
+                updateAgenda()
         }
 }

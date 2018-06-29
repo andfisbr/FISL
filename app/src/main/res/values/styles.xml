@@ -20,6 +20,13 @@
         </style >
         
         
+        
+        <style name="SplashTheme" parent="AppTheme.NoActionBar">
+                <item name="android:windowBackground">@drawable/ic_splash_background</item>
+        </style>
+        
+        
+        
         <style name="RobotoTextViewStyle"
                 parent="android:Widget.TextView" >
                 <item name="android:fontFamily" >sans-serif-condensed</item >

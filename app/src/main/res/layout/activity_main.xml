@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,18 +12,90 @@
                 android:id="@+id/main_banner"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:scaleType="matrix"
-                android:src="@drawable/ic_fisl_banner"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_banner_background"
                 />
         
-        <TextView
+        <ImageView
+                android:id="@+id/main_logo"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_alignBottom="@+id/main_banner"
+                android:layout_alignEnd="@+id/main_banner"
+                android:layout_alignRight="@+id/main_banner"
+                android:layout_marginEnd="-30dp"
+                android:layout_marginRight="-30dp"
+                android:src="@drawable/ic_logo_piece"
+                />
+        
+        <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="16dp"
-                android:text="FISL18\n18º Fórum Internacional\nSOFTWARE LIVRE\nA tecnologia que liberta"
-                android:textSize="20sp"
-                />
+                android:orientation="vertical"
+                >
+                
+                <TextView
+                        android:id="@+id/main_fisl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="FISL"
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18"
+                        android:textColor="#5B7A7A"
+                        android:textSize="26sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/main_fisl"
+                        app:layout_constraintLeft_toRightOf="@+id/main_fisl"
+                        app:layout_constraintTop_toTopOf="@+id/main_fisl"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_forum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="18º Fórum Internacional"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_software"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="SOFTWARE LIVRE"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl_forum"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_tecnologia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="A tecnologia que liberta"
+                        android:textColor="#5B7A7A"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl_software"
+                        />
+        </android.support.constraint.ConstraintLayout >
         
         
         <ImageView
@@ -42,11 +115,27 @@
                 />
         
         
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_banner"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="por André Fischer"
+                android:textSize="10sp"
+                android:textStyle="italic|bold"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                />
+        
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/main_banner"
                 android:scrollbarStyle="outsideOverlay"
+                android:layout_above="@+id/main_sponsors"
+                android:layout_marginBottom="8dp"
                 >
                 
                 <LinearLayout
@@ -61,6 +150,7 @@
                                 />
                         
                         <TextView
+                                android:id="@+id/main_about"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="16dp"
@@ -75,4 +165,17 @@
                                 />
                 </LinearLayout >
         </ScrollView >
+        
+        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+                android:id="@+id/main_sponsors"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                app:icvp_center_page_scale_offset="5dp"
+                app:icvp_max_page_scale="1.0"
+                app:icvp_medium_scaled="true"
+                app:icvp_min_page_scale="0.5"
+                app:icvp_min_page_scale_offset="0dp"
+                app:icvp_scroll_duration="5000"
+                />
 </RelativeLayout >

@@ -3,59 +3,140 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
+        app:cardElevation="4dp"
         >
         
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
                 android:id="@+id/roomrow_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
+                android:background="@color/white"
                 >
                 
-                <TextView
-                        android:id="@+id/roomrow_room"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sala"
-                        android:textSize="18sp"
-                        />
+                <!-- left panel -->
+                <RelativeLayout
+                        android:id="@+id/roomrow_panel_left"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        >
+                        
+                        <TextView
+                                android:id="@+id/roomrow_room"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="Sala"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/roomrow_duration"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:singleLine="false"
+                                android:text="duração"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                />
+                </RelativeLayout >
+                
                 
                 <TextView
                         android:id="@+id/roomrow_title"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/roomrow_room"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
                         android:singleLine="false"
                         android:text="Título da palestra"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        app:layout_constraintLeft_toRightOf="@+id/roomrow_panel_left"
+                        app:layout_constraintRight_toLeftOf="@+id/roomrow_notifyme"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_goneMarginLeft="8dp"
                         />
                 
+                
+                <ImageView
+                        android:id="@+id/roomrow_notifyme"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_notification_outline_black_24dp"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                
+                
                 <TextView
-                        android:id="@+id/roomrow_panelist"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/roomrow_owner"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_above="@+id/roomrow_track"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="end|right"
                         android:text="Palestrante"
                         android:textAllCaps="true"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/roomrow_track_container"
+                        app:layout_constraintLeft_toRightOf="@+id/roomrow_panel_left"
+                        app:layout_constraintRight_toRightOf="parent"
                         />
                 
-                <TextView
-                        android:id="@+id/roomrow_track"
+                
+                <android.support.v7.widget.CardView
+                        android:id="@+id/roomrow_track_container"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/colorPrimary"
-                        android:text="Trilha"
-                        android:textSize="18sp"
-                        android:textColor="@color/white"
-                        />
-        </RelativeLayout >
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+                        app:cardBackgroundColor="@color/colorAccent"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        >
+                        
+                        <TextView
+                                android:id="@+id/roomrow_track"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:paddingLeft="4dp"
+                                android:paddingRight="4dp"
+                                android:text="Trilha"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                />
+                </android.support.v7.widget.CardView >
+        
+        
+        </android.support.constraint.ConstraintLayout >
 </android.support.v7.widget.CardView >
