@@ -74,6 +74,6 @@ class AgendaPresenter: BasePresenter {
                 app!!.agenda = agenda
                 
                 
-                view!!.updateAgenda()
+                view!!.agendaUpdate()
         }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.support.multidex.MultiDexApplication
 import br.com.afischer.fisl.BuildConfig
 import br.com.afischer.fisl.models.Item
+import br.com.afischer.fisl.models.Keyword
 import br.com.afischer.fisl.models.Settings
 import br.com.afischer.fisl.models.TalkDetail
 import br.com.afischer.fisl.util.Consts
@@ -18,7 +19,8 @@ class FISLApplication: MultiDexApplication() {
         var aux: MutableList<Item> = mutableListOf()
         var tracks: MutableList<String> = mutableListOf()
         var talk: TalkDetail = TalkDetail()
-        
+        var keywords: MutableList<Keyword> = mutableListOf()
+        var keyword = ""
 
         var alarms: MutableMap<Int, AlarmBase> = mutableMapOf()
         lateinit var prefs: SharedPreferences

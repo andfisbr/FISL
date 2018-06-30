@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sv_container"
+        >
+        
+        <TextView
+                android:id="@+id/sv_text"
+                style="?android:attr/dropDownItemStyle"
+                android:layout_width="0dp"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:lines="2"
+                android:text="palestra sobre um assunto muito importante para a sociedade"
+                android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/sv_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        
+        <TextView
+                android:id="@+id/sv_type"
+                style="?android:attr/dropDownItemStyle"
+                android:layout_width="80dp"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:gravity="end|center_vertical"
+                android:singleLine="true"
+                android:text="palestrante"
+                android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+</android.support.constraint.ConstraintLayout >

@@ -16,4 +16,5 @@ data class Item(
         @SerializedName("talk") var talk: Talk? = null
 ) {
         var alarmID: Int = -1
+        var keywords: MutableList<String> = mutableListOf()
 }

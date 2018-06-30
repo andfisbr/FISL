@@ -10,11 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 
-
-
-
-
-
 class MainActivity: AppCompatActivity() {
         
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +17,54 @@ class MainActivity: AppCompatActivity() {
                 setContentView(R.layout.activity_main)
         
         
+        
+                main_about.text = R.string.about.asString(this).asHtml()
+
+
+                initTitle()
+                initListeners()
+                initSponsors()
+        }
+        
+        
+        
+        override fun onResume() {
+                super.onResume()
+                main_sponsors.startAutoScroll(true)
+        }
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        private fun initListeners() {
+                main_calendar.bringToFront()
+                main_calendar.setOnClickListener {
+                        main_sponsors.stopAutoScroll()
+                        startActivity<AgendaActivity>()
+                }
+        }
+        
+        
+        
+        private fun initSponsors() {
+                val list = mutableListOf(R.color.green_900, R.color.yellow_900, R.color.red_900, R.color.blue_900, R.color.brown_900, R.color.cyan_900, R.color.deep_orange_900, R.color.deep_purple_900, R.color.grey_900, R.color.indigo_900, R.color.pink_900, R.color.lime_900)
+                val adapter = PagerAdapter(supportFragmentManager)
                 
+                list.forEach {
+                        adapter.addFragment(SponsorsFragment.newInstance(it), "")
+                }
+                main_sponsors.adapter = adapter
+        }
+
+
+
+        private fun initTitle() {
                 /**
                  * carregando fonts
                  */
@@ -32,8 +74,8 @@ class MainActivity: AppCompatActivity() {
                 val orbitronMedium = Typeface.createFromAsset(assets, "fonts/orbitron-medium.otf")
         
         
-                
-                
+        
+        
                 /**
                  * alterando fonts
                  */
@@ -42,33 +84,5 @@ class MainActivity: AppCompatActivity() {
                 main_fisl_forum.typeface = orbitronMedium
                 main_fisl_software.typeface = orbitronMedium
                 main_fisl_tecnologia.typeface = orbitronMedium
-                
-                
-                
-                main_about.text = R.string.about.asString(this).asHtml()
-                
-                
-                
-                main_calendar.bringToFront()
-                main_calendar.setOnClickListener {
-                        startActivity<AgendaActivity>()
-                }
-        
-        
-                
-                
-                
-                /**
-                 * iniciando patrocinadores
-                 */
-                val list = mutableListOf(R.color.green_900, R.color.yellow_900, R.color.red_900, R.color.blue_900, R.color.brown_900, R.color.cyan_900, R.color.deep_orange_900, R.color.deep_purple_900, R.color.grey_900, R.color.indigo_900, R.color.pink_900, R.color.lime_900)
-                val adapter = PagerAdapter(supportFragmentManager)
-                
-                list.forEach {
-                        adapter.addFragment(SponsorsFragment.newInstance(it), "")
-                }
-                main_sponsors.adapter = adapter
-                main_sponsors.startAutoScroll(true)
-        
         }
 }

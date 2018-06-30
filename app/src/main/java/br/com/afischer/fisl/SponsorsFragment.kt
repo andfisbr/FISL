@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.afischer.fisl.bases.BaseView
+import com.pawegio.kandroid.hide
 import kotlinx.android.synthetic.main.fragment_sponsors.*
 
 
@@ -52,6 +53,7 @@ class SponsorsFragment: ParentFragment(), BaseView {
                 
                 
                 //sponsors_logo.setImageResource(param)
+                sponsors_logo.hide()
                 sponsors_container.setBackgroundResource(param)
         }
 }
