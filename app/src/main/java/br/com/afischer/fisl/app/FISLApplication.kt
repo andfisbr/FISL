@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.multidex.MultiDexApplication
 import br.com.afischer.fisl.BuildConfig
+import br.com.afischer.fisl.extensions.fromJson
 import br.com.afischer.fisl.models.Item
 import br.com.afischer.fisl.models.Keyword
 import br.com.afischer.fisl.models.Settings
@@ -11,6 +12,7 @@ import br.com.afischer.fisl.models.TalkDetail
 import br.com.afischer.fisl.util.Consts
 import br.com.afsystems.japassou.models.AlarmBase
 import com.crashlytics.android.Crashlytics
+import com.google.gson.Gson
 import io.fabric.sdk.android.Fabric
 
 
@@ -57,6 +59,7 @@ class FISLApplication: MultiDexApplication() {
                 
                 
                         alarms = settings.alarms
+                        agenda = settings.agenda
                 }
         }
         
@@ -87,4 +90,19 @@ class FISLApplication: MultiDexApplication() {
                         settings.alarms = alarms
                 }
         }
+        
+        
+        
+        
+        
+        
+        
+        fun agendaSave() {
+                prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(agenda)).apply()
+        }
+        fun agendaLoad() {
+                val t1a = mutableListOf<Item>()
+                agenda = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
+        }
+        
 }

@@ -12,6 +12,7 @@ import br.com.afischer.fisl.adapters.RoomsAdapter
 import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.extensions.asHtml
+import br.com.afischer.fisl.extensions.tlc
 import br.com.afischer.fisl.extensions.tuc
 import br.com.afischer.fisl.models.Item
 import br.com.afischer.fisl.models.TalkDetail
@@ -86,7 +87,7 @@ class TabFragment: ParentFragment(), BaseView {
                         activity = this.activity!!,
                         list = rows,
                         listener = { i -> showScheduleDetail(i) },
-                        filterListener = { i -> filterListener(i) },
+                        filterListener = { s, t -> filterListener(s, t) },
                         alarmListener = { i, s -> alarmListener(i, s) }
                 )
                 rooms_list.adapter = adapter
@@ -94,10 +95,16 @@ class TabFragment: ParentFragment(), BaseView {
         
         
         
-        private fun filterListener(item: Item) {
-                app.filter = item.talk?.track ?: ""
-
-                EventBus.getDefault().post(AgendaActivity_OnAgendaFilter(""))
+        private fun filterListener(param: String, type: String) {
+                app.filter = param.tlc()
+        
+        
+                EventBus.getDefault().post(AgendaActivity_OnAgendaFilter(
+                        when (type) {
+                                "track" -> param.split(" - ")[1]
+                                else -> param
+                        }
+                ))
         }
         
         

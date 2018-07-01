@@ -18,7 +18,7 @@ class RoomsAdapter(
         var activity: Activity,
         private var list: MutableList<Item>,
         var listener: (i: Item) -> Unit,
-        var filterListener: (i: Item) -> Unit,
+        var filterListener: (s: String, t: String) -> Unit,
         var alarmListener: (i: Item, s: String) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         
@@ -112,20 +112,21 @@ class RoomsAdapter(
         
         
         
-                        item.talk?.let {
+                        item.talk?.let { t ->
                                 roomrow_owner.show()
                                 roomrow_track.show()
                                 
 
-                                roomrow_title.text = it.title
-                                roomrow_owner.text = it.owner
-                                roomrow_track.text = it.track.split(" - ")[1]
+                                roomrow_title.text = t.title
+                                roomrow_owner.text = t.owner
+                                roomrow_track.text = t.track.split(" - ")[1]
                 
                 
                                 roomrow_container.setOnClickListener {
                                         listener(item)
                                 }
-                                roomrow_track.setOnClickListener { filterListener(item) }
+                                roomrow_owner.setOnClickListener { filterListener(t.owner, "owner") }
+                                roomrow_track.setOnClickListener { filterListener(t.track, "track") }
         
         
         

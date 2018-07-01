@@ -4,6 +4,7 @@ import br.com.afischer.fisl.app.FISLApplication
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.extensions.fromJson
 import br.com.afischer.fisl.extensions.pad
+import br.com.afischer.fisl.extensions.tlc
 import com.crashlytics.android.Crashlytics
 import com.google.gson.Gson
 
@@ -12,6 +13,7 @@ import com.google.gson.Gson
 class AgendaRN(var app: FISLApplication) {
         private val site: Site = Site()
         private var result: String = ""
+        
         
 
         fun retrieve(day: String = ""): FISLResult {
@@ -29,9 +31,9 @@ class AgendaRN(var app: FISLApplication) {
                 
                 
                 try {
-                        /**
-                         * obtem do servidor as informações
-                         */
+                        //
+                        // obtem do servidor as informações
+                        //
                         
                         
                         days.forEach {
@@ -51,6 +53,9 @@ class AgendaRN(var app: FISLApplication) {
                         }
                         
                         
+                        app.agendaSave()
+                        
+                        
                         
                         
                         
@@ -62,6 +67,85 @@ class AgendaRN(var app: FISLApplication) {
                 
                 
                 return FISLResult(ResultType.SUCCESS)
+        }
+        
+        
+        
+        
+        
+        
+        
+        fun loadKeywords() {
+                /**
+                 * acerta as keywords para os filtros
+                 */
+                app.agenda.forEach { item ->
+                        if (item.talk == null) {
+                                return@forEach
+                        }
+                
+                        val title = item.talk?.title!!.tlc()
+                        val owner = item.talk?.owner!!.tlc()
+                        val track = item.talk?.track!!.tlc().split(" - ")[1]
+                        item.keywords.add(title)
+                        item.keywords.add(owner)
+                        item.keywords.add(track)
+                
+                
+                        if (app.keywords.none { it.text == title }) {
+                                app.keywords.add(Keyword(title, "título"))
+                        }
+                
+                        if (app.keywords.none { it.text == owner }) {
+                                app.keywords.add(Keyword(owner, "palestrante"))
+                        }
+                
+                        if (app.keywords.none { it.text == track }) {
+                                app.keywords.add(Keyword(track, "trilha"))
+                        }
+                }
+        }
+        
+        
+        
+        
+        
+        
+
+        fun filter() {
+                app.aux.clear()
+
+                
+                app.aux.addAll(
+                        app.agenda.filter {
+                                it.begins.startsWith(app.date)
+                        }.filter {
+                                if (app.filter.isNotEmpty()) it.keywords.contains(app.filter) else true
+                        }
+                )
+        }
+        
+        
+        
+        
+
+
+
+        fun initTracks() {
+                app.tracks.clear()
+                
+                
+                app.agenda.filter {
+                        it.begins.startsWith(app.date)
+                }.filter {
+                        if (app.filter.isNotEmpty()) it.keywords.contains(app.filter) else true
+                }.forEach {
+                        it.talk?.let { talk ->
+                                if (!app.tracks.contains(talk.track)) {
+                                        app.tracks.add(talk.track)
+                                }
+                        }
+                }
         }
         
         

@@ -19,23 +19,11 @@ object Consts {
         
 
         
-        const val PREFS_SETTINGS_ADS_SHOW_AFTER = "settings.adsShowAfter"
-        const val PREFS_SETTINGS_ADS_TIME_BETWEEN = "settings.adsTimeBetween"
         const val PREFS_SETTINGS_DISMISSED_MESSAGES = "settings.dismissedMessages"
         const val PREFS_SETTINGS_FAVORITIES = "settings.favorities"
         const val PREFS_SETTINGS_SHORTCUTS = "settings.shortcuts"
-        const val PREFS_SETTINGS_LAYOUT = "settings.layout"
-        const val PREFS_SETTINGS_ACCEPT_TERMS = "settings.acceptTerms"
-        const val PREFS_SETTINGS_ACCEPT_PRIVACY = "settings.acceptPrivacy"
-        const val PREFS_SETTINGS_INTRO_SHOWN = "settings.introShown"
-        const val PREFS_SETTINGS_ALREADY_RATED = "settings.alreadyRated"
-        const val PREFS_SETTINGS_RATE_TIMEOUT = "settings.rateTimeout"
-        const val PREFS_SETTINGS_USER_TYPE = "settings.userType"
-        const val PREFS_SETTINGS_USER_COMPANY = "settings.userCompany"
-        const val PREFS_SETTINGS_USED_TIMES = "settings.userTimes"
-        const val PREFS_SETTINGS_DONATE_DAYS = "settings.donateDays"
-        const val PREFS_SETTINGS_CACHE = "settings.cache"
         const val PREFS_SETTINGS_ALARMS = "settings.alarms"
+        const val PREFS_SETTINGS_AGENDA = "settings.agenda"
         
         
         const val ACTION_MAIN = "br.com.afischer.fisl.action.main"
