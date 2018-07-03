@@ -1,12 +1,13 @@
 package br.com.afischer.fisl.models
 
 import com.google.gson.annotations.SerializedName
+
 data class Resource(
-        @SerializedName("coauthors") var coauthors: MutableList<Any>? = null,
-        @SerializedName("full") var full: String = "",
-        @SerializedName("id") var id: Int = -1,
-        @SerializedName("owner") var owner: Owner? = null,
-        @SerializedName("slots") var slots: MutableList<Slot>? = null,
-        @SerializedName("title") var title: String = "",
-        @SerializedName("track") var track: String = ""
+	@SerializedName("owner") val owner: Owner = Owner(),
+	@SerializedName("slots") val slots: MutableList<Slot> = mutableListOf(),
+	@SerializedName("id") val id: Int = -1,
+	@SerializedName("coauthors") val coauthors: MutableList<Coauthor> = mutableListOf(),
+	@SerializedName("title") val title: String = "",
+	@SerializedName("track") val track: String = "",
+	@SerializedName("full") val full: String = ""
 )

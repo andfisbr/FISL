@@ -7,9 +7,6 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
         >
@@ -19,6 +16,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 >
                 
                 <!-- left panel -->
@@ -88,7 +88,6 @@
                         android:focusable="true"
                         android:padding="2dp"
                         android:src="@drawable/ic_notification_outline_black_24dp"
-                        android:tint="@color/colorPrimary"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
@@ -126,9 +125,6 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
                         app:cardBackgroundColor="@color/colorAccent"
                         app:cardCornerRadius="4dp"
                         app:cardElevation="0dp"
@@ -149,6 +145,9 @@
                                 android:text="Trilha"
                                 android:textColor="@color/white"
                                 android:textSize="14sp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:focusable="true"
                                 />
                 </android.support.v7.widget.CardView >
         

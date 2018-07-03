@@ -5,10 +5,9 @@ import android.content.SharedPreferences
 import android.support.multidex.MultiDexApplication
 import br.com.afischer.fisl.BuildConfig
 import br.com.afischer.fisl.extensions.fromJson
+import br.com.afischer.fisl.models.Agenda
 import br.com.afischer.fisl.models.Item
-import br.com.afischer.fisl.models.Keyword
 import br.com.afischer.fisl.models.Settings
-import br.com.afischer.fisl.models.TalkDetail
 import br.com.afischer.fisl.util.Consts
 import br.com.afsystems.japassou.models.AlarmBase
 import com.crashlytics.android.Crashlytics
@@ -17,23 +16,12 @@ import io.fabric.sdk.android.Fabric
 
 
 class FISLApplication: MultiDexApplication() {
-        var agenda: MutableList<Item> = mutableListOf()
-        var aux: MutableList<Item> = mutableListOf()
-        var tracks: MutableList<String> = mutableListOf()
-        var talk: TalkDetail = TalkDetail()
-        var keywords: MutableList<Keyword> = mutableListOf()
-        var keyword = ""
+        lateinit var agenda: Agenda
+        
 
         var alarms: MutableMap<Int, AlarmBase> = mutableMapOf()
         lateinit var prefs: SharedPreferences
         lateinit var settings: Settings
-        
-        
-        var filter = ""
-        var yearMonth = "2018-07-"
-        var day: String = "11"
-        var date: String = ""
-                get() = "$yearMonth$day"
         
         
         
@@ -44,7 +32,8 @@ class FISLApplication: MultiDexApplication() {
                 super.onCreate()
         
                 Fabric.with(this, Crashlytics())
-        
+                
+                agenda = Agenda(this)
         
         
                 prefs = applicationContext.getSharedPreferences(Consts.PREFS_LOCAL, Context.MODE_PRIVATE)
@@ -59,7 +48,7 @@ class FISLApplication: MultiDexApplication() {
                 
                 
                         alarms = settings.alarms
-                        agenda = settings.agenda
+                        agenda.items = settings.agendaItems
                 }
         }
         
@@ -98,11 +87,11 @@ class FISLApplication: MultiDexApplication() {
         
         
         fun agendaSave() {
-                prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(agenda)).apply()
+                prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(agenda.items)).apply()
         }
         fun agendaLoad() {
                 val t1a = mutableListOf<Item>()
-                agenda = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
+                agenda.items = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
         }
         
 }

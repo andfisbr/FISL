@@ -18,7 +18,7 @@ class Settings(private var prefs: SharedPreferences) {
         
         
         
-        var agenda: MutableList<Item> = mutableListOf()
+        var agendaItems: MutableList<Item> = mutableListOf()
                 set(value) {
                         field = value
                         if (!loading) prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(field)).apply()
@@ -31,7 +31,7 @@ class Settings(private var prefs: SharedPreferences) {
                 loading = true
                 
                 val t1a = mutableListOf<Item>()
-                agenda = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
+                agendaItems = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
                 
                 val t2a = mutableMapOf<Int, AlarmBase>()
                 alarms = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_ALARMS, Gson().toJson(t2a)))

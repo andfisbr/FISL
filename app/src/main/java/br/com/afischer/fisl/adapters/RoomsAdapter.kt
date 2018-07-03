@@ -91,6 +91,7 @@ class RoomsAdapter(
                 fun bind(item: Item, position: Int) = with(itemView) {
                         roomrow_owner.hide()
                         roomrow_track.hide()
+                        roomrow_notifyme.hide()
                         roomrow_container.setBackgroundResource(R.color.white)
         
         
@@ -115,6 +116,7 @@ class RoomsAdapter(
                         item.talk?.let { t ->
                                 roomrow_owner.show()
                                 roomrow_track.show()
+                                roomrow_notifyme.show()
                                 
 
                                 roomrow_title.text = t.title
@@ -122,9 +124,7 @@ class RoomsAdapter(
                                 roomrow_track.text = t.track.split(" - ")[1]
                 
                 
-                                roomrow_container.setOnClickListener {
-                                        listener(item)
-                                }
+                                roomrow_container.setOnClickListener { listener(item) }
                                 roomrow_owner.setOnClickListener { filterListener(t.owner, "owner") }
                                 roomrow_track.setOnClickListener { filterListener(t.track, "track") }
         

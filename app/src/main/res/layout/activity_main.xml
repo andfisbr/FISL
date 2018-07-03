@@ -98,37 +98,6 @@
         </android.support.constraint.ConstraintLayout >
         
         
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/main_calendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                app:fabSize="normal"
-                app:backgroundTint="@color/colorPrimaryDark"
-                android:src="@drawable/ic_calendar_clock_white_32dp"
-                app:useCompatPadding="true"
-                />
-        
-        
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/main_banner"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="por André Fischer"
-                android:textSize="10sp"
-                android:textStyle="italic|bold"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                />
-        
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -164,17 +133,66 @@
                 </LinearLayout >
         </ScrollView >
         
-        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-                android:id="@+id/main_sponsors"
+        
+        
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_above="@+id/main_dev"
+                android:background="@color/white"
+                >
+                <com.synnapps.carouselview.CarouselView
+                        android:id="@+id/main_sponsors"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indicatorVisibility="gone"
+                        app:slideInterval="8000"
+                        />
+        </LinearLayout >
+        
+        
+        <TextView
+                android:id="@+id/main_dev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                app:icvp_scroll_duration="10000"
-                app:icvp_center_page_scale_offset="0dp"
-                app:icvp_min_page_scale_offset="0dp"
-                app:icvp_max_page_scale="1.0"
-                app:icvp_min_page_scale="1.0"
-                app:icvp_medium_scaled="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif-condensed"
+                android:text="desenvolvido por Fulano de Tal"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white_smoke"
+                android:padding="2dp"
+                android:gravity="center"
+                />
+        
+        
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_sponsor02"
                 android:visibility="gone"
+                />
+        
+        
+        
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/main_calendar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_calendar_clock_white_32dp"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:fabSize="normal"
+                app:useCompatPadding="true"
                 />
 </RelativeLayout >

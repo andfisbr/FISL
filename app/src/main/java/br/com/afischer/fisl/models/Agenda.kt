@@ -1,27 +1,48 @@
 package br.com.afischer.fisl.models
 
 import br.com.afischer.fisl.app.FISLApplication
+import br.com.afischer.fisl.enums.ResultType
+import br.com.afischer.fisl.extensions.fromJson
+import br.com.afischer.fisl.extensions.pad
+import com.crashlytics.android.Crashlytics
+import com.google.gson.Gson
 
-
-
-class AgendaRN(var app: FISLApplication) {
+class Agenda (var app: FISLApplication) {
+        var items = mutableListOf<Item>()
+        
+        
+        var aux: MutableList<Item> = mutableListOf()
+        var tracks: MutableList<String> = mutableListOf()
+        var talk: TalkDetail = TalkDetail()
+        var keywords: MutableList<Keyword> = mutableListOf()
+        
+        
+        var filter = ""
+        var yearMonth = "2018-07-"
+        var day: String = "11"
+        var date: String = ""
+                get() = "$yearMonth$day"
+        
+        
+        
         private val site: Site = Site()
         private var result: String = ""
         
         
-/*
-        fun retrieve(day: String = ""): FISLResult {
-                app.agenda.clear()
         
+        
+        fun retrieve(day: String = ""): FISLResult {
+                items.clear()
                 
-                val hours = 1..10
+                
+                val rooms = 1..10
                 var days = 11..14
                 
                 
                 if (day.isNotEmpty()) {
                         days = day.toInt()..day.toInt()
                 }
-
+                
                 
                 
                 try {
@@ -31,9 +52,9 @@ class AgendaRN(var app: FISLApplication) {
                         
                         
                         days.forEach {
-                                val date = "${app.yearMonth}${it.pad("<00")}"
+                                val date = "$yearMonth${it.pad("<00")}"
                                 
-                                hours.forEach { room ->
+                                rooms.forEach { room ->
                                         result = site.get(site.url.agenda.format(room, date))
                                         if (result == "") {
                                                 return FISLResult(ResultType.NO_RESPONSE, "[NO_RESPONSE] Sem resposta do website")
@@ -41,19 +62,14 @@ class AgendaRN(var app: FISLApplication) {
                                         
                                         val d: Day = Gson().fromJson(result)
                                         d.items.forEach {
-                                                app.agenda.add(it)
+                                                items.add(it)
                                         }
                                 }
                         }
                         
                         
-                        app.agendaSave()
                         
                         
-                        loadKeywords()
-                        
-                        
-        
                 } catch (ex: Exception) {
                         Crashlytics.logException(ex)
                         return FISLResult(ResultType.EXCEPTION, "[EXCEPTION] Problemas ao obter a agenda")
@@ -66,36 +82,43 @@ class AgendaRN(var app: FISLApplication) {
         
         
         
+        fun doSave() {
+                app.agendaSave()
+        }
+        fun doLoad() {
+                app.agendaLoad()
+        }
         
         
         
-        fun loadKeywords() {
+        
+        fun doKeywords() {
                 //
                 // acerta as keywords para os filtros
                 //
-                app.agenda.forEach { item ->
+                items.forEach { item ->
                         if (item.talk == null) {
                                 return@forEach
                         }
-                
+                        
                         val title = item.talk?.title!!.toLowerCase()
                         val owner = item.talk?.owner!!.toLowerCase()
                         val track = item.talk?.track!!.toLowerCase().split(" - ")[1]
                         item.keywords.add(title)
                         item.keywords.add(owner)
                         item.keywords.add(track)
-                
-                
-                        if (app.keywords.none { it.text == title }) {
-                                app.keywords.add(Keyword(title, "título"))
+                        
+                        
+                        if (keywords.none { it.text == title }) {
+                                keywords.add(Keyword(title, "título"))
                         }
-                
-                        if (app.keywords.none { it.text == owner }) {
-                                app.keywords.add(Keyword(owner, "palestrante"))
+                        
+                        if (keywords.none { it.text == owner }) {
+                                keywords.add(Keyword(owner, "palestrante"))
                         }
-                
-                        if (app.keywords.none { it.text == track }) {
-                                app.keywords.add(Keyword(track, "trilha"))
+                        
+                        if (keywords.none { it.text == track }) {
+                                keywords.add(Keyword(track, "trilha"))
                         }
                 }
         }
@@ -105,16 +128,16 @@ class AgendaRN(var app: FISLApplication) {
         
         
         
-
-        fun filter() {
-                app.aux.clear()
-
+        
+        fun doFilter() {
+                aux.clear()
                 
-                app.aux.addAll(
-                        app.agenda.filter {
-                                it.begins.startsWith(app.date)
+                
+                aux.addAll(
+                        items.filter {
+                                it.begins.startsWith(date)
                         }.filter {
-                                if (app.filter.isNotEmpty()) it.keywords.contains(app.filter) else true
+                                if (filter.isNotEmpty()) it.keywords.contains(filter) else true
                         }
                 )
         }
@@ -122,21 +145,21 @@ class AgendaRN(var app: FISLApplication) {
         
         
         
-
-
-
-        fun initTracks() {
-                app.tracks.clear()
+        
+        
+        
+        fun doTracks() {
+                tracks.clear()
                 
                 
-                app.agenda.filter {
-                        it.begins.startsWith(app.date)
+                items.filter {
+                        it.begins.startsWith(date)
                 }.filter {
-                        if (app.filter.isNotEmpty()) it.keywords.contains(app.filter) else true
+                        if (filter.isNotEmpty()) it.keywords.contains(filter) else true
                 }.forEach {
                         it.talk?.let { talk ->
-                                if (!app.tracks.contains(talk.track)) {
-                                        app.tracks.add(talk.track)
+                                if (!tracks.contains(talk.track)) {
+                                        tracks.add(talk.track)
                                 }
                         }
                 }
@@ -152,18 +175,21 @@ class AgendaRN(var app: FISLApplication) {
                         if (result == "") {
                                 return FISLResult(ResultType.NO_RESPONSE, "[NO_RESPONSE] Sem resposta do website")
                         }
-                
-                
-                        app.talk = Gson().fromJson(result)
-                
-                
+                        
+                        
+                        talk = Gson().fromJson(result)
+                        
+                        
                 } catch (ex: Exception) {
                         Crashlytics.logException(ex)
                         return FISLResult(ResultType.EXCEPTION, "[EXCEPTION] Problemas ao obter os detalhes da palestra")
                 }
-        
-        
+                
+                
                 return FISLResult(ResultType.SUCCESS)
         }
-*/
+        
+        
+        
+        
 }

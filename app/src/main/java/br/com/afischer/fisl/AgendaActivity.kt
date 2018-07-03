@@ -8,21 +8,21 @@ import br.com.afischer.fisl.adapters.SearcherAdapter
 import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
+import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
+import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
+import br.com.afischer.fisl.events.AgendaActivity_ShowToast
 import br.com.afischer.fisl.extensions.asColor
 import br.com.afischer.fisl.extensions.hideKeyboard
 import br.com.afischer.fisl.extensions.showKeyboard
-import br.com.afischer.fisl.models.AgendaRN
 import br.com.afischer.fisl.models.Keyword
 import com.pawegio.kandroid.hide
 import com.pawegio.kandroid.show
 import kotlinx.android.synthetic.main.activity_agenda.*
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class AgendaActivity: ParentActivity(), BaseView {
@@ -44,7 +44,16 @@ class AgendaActivity: ParentActivity(), BaseView {
                 
                 
                 
-                initButtons()
+                //initButtons()
+                filterDays()
+                
+                if (app.agenda.filter.isNotEmpty()) {
+                        agenda_search.setText(app.agenda.filter)
+                        searchInit(false)
+                }
+                
+                
+                
                 initListeners()                
                 initAutocompleteSearcher()
                 initPager()                
@@ -61,6 +70,8 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         override fun onStop() {
                 EventBus.getDefault().unregister(this)
+                
+                
                 super.onStop()
         }
         
@@ -98,7 +109,7 @@ class AgendaActivity: ParentActivity(), BaseView {
                 
                 buttons.forEach { b ->
                         b.setOnClickListener {
-                                app.day = b.text.toString()
+                                app.agenda.day = b.text.toString()
                                 onDayButtonClick()
                         }
                 }
@@ -117,8 +128,8 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         private fun initViewPager() {
                 val tabs = mutableListOf<String>()
-                app.aux.filter {
-                        it.begins.startsWith(app.date)
+                app.agenda.aux.filter {
+                        it.begins.startsWith(app.agenda.date)
                 }.map {
                         it.begins.split("T")[1]
                 }.distinct().sorted().toMutableList().forEach {
@@ -149,12 +160,12 @@ class AgendaActivity: ParentActivity(), BaseView {
         
 
         private fun initAutocompleteSearcher() {
-                val searcherAdapter = SearcherAdapter(this, R.layout.searcher_view, app.keywords.sortedBy { it.text }.toMutableList())
+                val searcherAdapter = SearcherAdapter(this, R.layout.searcher_view, app.agenda.keywords.sortedBy { it.text }.toMutableList())
                 agenda_search.setAdapter(searcherAdapter)
-                agenda_search.setOnItemClickListener { adapterView, view, i, l ->
+                agenda_search.setOnItemClickListener { adapterView, _, i, _ ->
                         
-                        app.filter = (adapterView.getItemAtPosition(i) as Keyword).text.replace("<strong>", "").replace("</strong>", "")
-                        agenda_search.setText(app.filter)
+                        app.agenda.filter = (adapterView.getItemAtPosition(i) as Keyword).text.replace("<strong>", "").replace("</strong>", "")
+                        agenda_search.setText(app.agenda.filter)
                         
                         
                         hideKeyboard()
@@ -194,8 +205,8 @@ class AgendaActivity: ParentActivity(), BaseView {
                 // - mapeia os dias
                 // - mostra botões conforme os dias mapeados
                 //
-                app.agenda.filter {
-                        if (app.filter.isNotEmpty()) it.keywords.contains(app.filter) else true
+                app.agenda.items.filter {
+                        if (app.agenda.filter.isNotEmpty()) it.keywords.contains(app.agenda.filter) else true
 
                 }.map {
                         it.begins.slice(8..9)
@@ -209,7 +220,10 @@ class AgendaActivity: ParentActivity(), BaseView {
                 //
                 // acerta o dia do filtro
                 //
-                buttons.forEach { if (it.isShown) app.day = it.text.toString() }
+                app.agenda.day = "11"
+                if (buttons.any { it.isShown }) {
+                        app.agenda.day = (buttons.first { it.isShown }).text.toString()
+                }
 
                 
                 
@@ -241,8 +255,8 @@ class AgendaActivity: ParentActivity(), BaseView {
         
 
 
-                app.filter = ""
-                app.day = "11"
+                app.agenda.filter = ""
+                app.agenda.day = "11"
         
         
                 buttons.forEach { it.show() }
@@ -265,7 +279,7 @@ class AgendaActivity: ParentActivity(), BaseView {
                         //
                         // muda o estilo do botão conforme o dia selecionado
                         //
-                        if (it.text == app.day) {
+                        if (it.text == app.agenda.day) {
                                 it.backgroundResource = R.drawable.ic_circle_green
                                 it.setTextColor(R.color.white.asColor(this))
                         }
@@ -296,16 +310,19 @@ class AgendaActivity: ParentActivity(), BaseView {
         private fun agendaInit() {
                 progressShow()
         
-                launch(UI) {
-                        val result = async(CommonPool) { AgendaRN(app).retrieve(app.day) }.await()
+                doAsync {
+                        val result = app.agenda.retrieve(app.agenda.day)
         
-                        if (result.type != ResultType.SUCCESS) {
-                                progressHide()
-                                toastyShow("e", "Houve um imprevisto na obtenção da agenda, tente mais tarde.")
-                                return@launch
+        
+                        uiThread {
+                                if (result.type != ResultType.SUCCESS) {
+                                        progressHide()
+                                        toastyShow("e", "Houve um imprevisto na obtenção da agenda, tente mais tarde.")
+                                        return@uiThread
+                                }
+        
+                                agendaUpdate()
                         }
-        
-                        agendaUpdate()
                 }
         }
         
@@ -314,11 +331,11 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         
         
-        fun agendaUpdate() {
+        private fun agendaUpdate() {
                 /**
                  * obtém as trilhas da agenda antes do filtro
                  */
-                AgendaRN(app).initTracks()
+                app.agenda.doTracks()
         
         
 
@@ -326,7 +343,7 @@ class AgendaActivity: ParentActivity(), BaseView {
                 /**
                  * filtra pela trilha escolhida
                  */
-                AgendaRN(app).filter()
+                app.agenda.doFilter()
         
         
                 
@@ -359,12 +376,28 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         
         @Subscribe fun onEvent(event: AgendaActivity_OnAgendaFilter) {
-                agenda_search.setText(event.message)
-                
                 searchInit(false)
-                
+
+                agenda_search.setText(event.message)
                 agenda_search.dismissDropDown()
+        
+        
+                filterDays()
                 
                 agendaUpdate()
+        }
+        
+
+        @Subscribe fun onEvent(event: AgendaActivity_ShowToast) {
+                toastyShow("i", event.message)
+        }
+        
+
+        @Subscribe fun onEvent(event: AgendaActivity_ProgressShow) {
+                progressShow(event.message)
+        }
+
+        @Subscribe fun onEvent(event: AgendaActivity_ProgressHide) {
+                progressHide()
         }
 }

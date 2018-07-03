@@ -10,8 +10,8 @@ android {
                 applicationId "br.com.afischer.fisl"
                 minSdkVersion 16
                 targetSdkVersion 27
-                versionCode 100
-                versionName "1.0.0"
+                versionCode 101
+                versionName "1.0.1"
                 
                 multiDexEnabled true
         }
@@ -72,7 +72,7 @@ dependencies {
         implementation( 'org.greenrobot:eventbus:3.0.0' ) {}
         implementation( 'com.github.hotchemi:khronos:0.9.0' ) {}
         implementation( 'com.github.devlight:infinitecycleviewpager:1.0.2' ) {}
-
+        implementation( 'com.synnapps:carouselview:0.1.4' ) {}
         
         
         

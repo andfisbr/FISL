@@ -3,7 +3,7 @@ package br.com.afischer.fisl.models
 import com.google.gson.annotations.SerializedName
 
 data class Talk(
-        @SerializedName("coauthors") var coauthors: MutableList<Any>? = null,
+        @SerializedName("coauthors") var coauthors: MutableList<String> = mutableListOf(),
         @SerializedName("id") var id: Int = -1,
         @SerializedName("last_updated") var lastUpdated: String = "",
         @SerializedName("owner") var owner: String = "",

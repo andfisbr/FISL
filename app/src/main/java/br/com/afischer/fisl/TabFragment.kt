@@ -1,7 +1,6 @@
 package br.com.afischer.fisl
 
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -11,16 +10,20 @@ import android.view.ViewGroup
 import br.com.afischer.fisl.adapters.RoomsAdapter
 import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
+import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
+import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
+import br.com.afischer.fisl.events.AgendaActivity_ShowToast
 import br.com.afischer.fisl.extensions.asHtml
-import br.com.afischer.fisl.extensions.tlc
-import br.com.afischer.fisl.extensions.tuc
 import br.com.afischer.fisl.models.Item
-import br.com.afischer.fisl.models.TalkDetail
 import br.com.afsystems.japassou.models.AlarmBase
-import kotlinx.android.synthetic.main.dialog_schedule_detail.view.*
+import com.crashlytics.android.Crashlytics
+import com.pawegio.kandroid.show
+import kotlinx.android.synthetic.main.dialog_talk_detail.view.*
 import kotlinx.android.synthetic.main.fragment_tab.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.util.*
 
 
@@ -71,11 +74,11 @@ class TabFragment: ParentFragment(), BaseView {
         
                 
         
-                /**
-                 * filtra a agenda pelas horas
-                 */
-                val rows = app.aux.filter {
-                        it.begins.trim() == "${app.date}T$param:00"
+                //
+                // filtra a agenda pelas horas
+                //
+                val rows = app.agenda.aux.filter {
+                        it.begins.trim() == "${app.agenda.date}T$param:00"
                 }.sortedBy {
                         it.room
                 }.toMutableList()
@@ -86,7 +89,7 @@ class TabFragment: ParentFragment(), BaseView {
                 adapter = RoomsAdapter(
                         activity = this.activity!!,
                         list = rows,
-                        listener = { i -> showScheduleDetail(i) },
+                        listener = { i -> detailListener(i) },
                         filterListener = { s, t -> filterListener(s, t) },
                         alarmListener = { i, s -> alarmListener(i, s) }
                 )
@@ -96,42 +99,69 @@ class TabFragment: ParentFragment(), BaseView {
         
         
         private fun filterListener(param: String, type: String) {
-                app.filter = param.tlc()
+                app.agenda.filter = when (type) {
+                        "track" -> param.toLowerCase().split(" - ")[1]
+                        else -> param.toLowerCase()
+                }
         
         
-                EventBus.getDefault().post(AgendaActivity_OnAgendaFilter(
-                        when (type) {
-                                "track" -> param.split(" - ")[1]
-                                else -> param
-                        }
-                ))
+                EventBus.getDefault().post(AgendaActivity_OnAgendaFilter(app.agenda.filter))
         }
         
         
-        private fun showScheduleDetail(i: Item) {
-                //presenter.retrieveTalk(i.talk!!.id)
-        }
-        
-        
-        @SuppressLint("SetTextI18n")
-        fun updateTalkDetail(talk: TalkDetail) {
-                val view = inflate(context, R.layout.dialog_schedule_detail, null)
-                
-                view.dsd_title.text = talk.resource.title
-                view.dsd_track.text = "<strong>Trilha</strong>:<br>${talk.resource.track}".asHtml()
-                view.dsd_panelist.text = "<strong>Palestrante</strong>:<br>${talk.resource.owner!!.name.tuc()}<br>${talk.resource.owner!!.resume}".asHtml()
-                view.dsd_local.text = "<strong>Apresentação</strong>:<br>Dia <strong>${talk.resource.slots!![0].begins.split("T")[0].split("-")[2]}</strong> às <strong>${talk.resource.slots!![0].hour}h</strong> na sala <strong>${talk.resource.slots!![0].roomName}</strong> (${talk.resource.slots!![0].duration})".asHtml()
-                view.dsd_description.text = "<strong>Descrição</strong>:<br>${talk.resource.full}".asHtml()
-                
-        
-                activity!!.alert {
-                        customView = view
-                        isCancelable = false
+        private fun detailListener(i: Item) {
+                EventBus.getDefault().post(AgendaActivity_ProgressShow("Aguarde"))
+                doAsync {
+                        var result = app.agenda.retrieveTalk(i.talk?.id)
                         
-                        positiveButton("Fechar") {
-                                it.dismiss()
+                        
+                        uiThread {
+                                EventBus.getDefault().post(AgendaActivity_ProgressHide())
+                                updateDetails()
                         }
-                }.show()
+                }
+        }
+        
+        
+
+        private fun updateDetails() {
+                val view = inflate(context, R.layout.dialog_talk_detail, null)
+                
+                try {
+                        view.dsd_title.text = app.agenda.talk.resource.title
+                        view.dsd_track.text = app.agenda.talk.resource.track.asHtml()
+                        view.dsd_owner.text = "${app.agenda.talk.resource.owner.name.toUpperCase()}<br>${app.agenda.talk.resource.owner.resume}".asHtml()
+                        
+                        
+                        val co = mutableListOf<String>()
+                        app.agenda.talk.resource.coauthors.forEach {
+                                co.add(it.name.toUpperCase())
+                                co.add(it.resume)
+                        }
+                        view.dsd_coauthor.text = co.joinToString("<br>").asHtml()
+                        if (app.agenda.talk.resource.coauthors.isNotEmpty())
+                                view.dsd_coauthor.show()
+        
+
+                        view.dsd_local.text = "Dia <strong>${app.agenda.talk.resource.slots[0].begins.split("T")[0].split("-")[2]}</strong> às <strong>${app.agenda.talk.resource.slots[0].hour}h</strong> na sala <strong>${app.agenda.talk.resource.slots[0].roomName}</strong> (${app.agenda.talk.resource.slots[0].duration}min)".asHtml()
+                        view.dsd_description.text = app.agenda.talk.resource.full.asHtml()
+        
+
+                        
+                        activity!!.alert {
+                                customView = view
+                                isCancelable = false
+                
+                                positiveButton("Fechar") {
+                                        it.dismiss()
+                                }
+                        }.show()
+                
+                } catch (ex: Exception) {
+                        Crashlytics.logException(ex)
+                        
+                        EventBus.getDefault().post(AgendaActivity_ShowToast(""))
+                }
         }
         
         
