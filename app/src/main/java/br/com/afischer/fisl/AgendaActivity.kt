@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
 
@@ -29,6 +30,10 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         private var pagerAdapter: PagerAdapter? = null
         private val buttons = mutableListOf<TextView>()
+        
+        private var isLastPageSwiped: Boolean = false
+        private var counterPageScroll: Int = -1
+        
         
         
         
@@ -57,8 +62,12 @@ class AgendaActivity: ParentActivity(), BaseView {
                 initListeners()                
                 initAutocompleteSearcher()
                 initPager()                
+        }
+        
+        
+        override fun onResume() {
+                super.onResume()
 
-                
                 agendaUpdate()
         }
         
@@ -70,13 +79,13 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         override fun onStop() {
                 EventBus.getDefault().unregister(this)
-                
-                
                 super.onStop()
         }
         
-        
-        
+        override fun onDestroy() {
+                setResult(1000)
+                super.onDestroy()
+        }
         
 
         
@@ -92,9 +101,15 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         
         private fun initListeners() {
+                setResult(1000)
                 agenda_back_button.setOnClickListener {
                         finish()
                 }
+                agenda_toolbar_title.setOnClickListener {
+                        finish()
+                }
+
+
                 agenda_search_button.setOnClickListener {
                         if (agenda_search_container.isShown) {
                                 searchReset()
@@ -104,7 +119,11 @@ class AgendaActivity: ParentActivity(), BaseView {
                                 searchInit()
                         }
                 }
-                
+        
+
+                agenda_alarm_button.setOnClickListener {
+                        startActivity<AlarmActivity>()
+                }
                 
                 
                 buttons.forEach { b ->
@@ -191,9 +210,9 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         
         
-        /**
-         * mostra botões dos dias baseado nos filtros
-         */
+        //
+        // mostra botões dos dias baseado nos filtros
+        //
         private fun filterDays() {
 
                 buttons.forEach { it.hide() }
@@ -281,7 +300,7 @@ class AgendaActivity: ParentActivity(), BaseView {
                         //
                         if (it.text == app.agenda.day) {
                                 it.backgroundResource = R.drawable.ic_circle_green
-                                it.setTextColor(R.color.white.asColor(this))
+                                it.setTextColor(R.color.colorAccent.asColor(this))
                         }
                 }
         }
@@ -389,7 +408,7 @@ class AgendaActivity: ParentActivity(), BaseView {
         
 
         @Subscribe fun onEvent(event: AgendaActivity_ShowToast) {
-                toastyShow("i", event.message)
+                toastyShow(event.type, event.message)
         }
         
 

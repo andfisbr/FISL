@@ -9,6 +9,7 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import br.com.afischer.fisl.adapters.RoomsAdapter
 import br.com.afischer.fisl.bases.BaseView
+import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
 import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
@@ -30,8 +31,6 @@ import java.util.*
 class TabFragment: ParentFragment(), BaseView {
         private var param: String = "09:00"
         private var adapter: RoomsAdapter? = null
-        
-        
         
 
         companion object {
@@ -69,9 +68,13 @@ class TabFragment: ParentFragment(), BaseView {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                 super.onViewCreated(view, savedInstanceState)
         
+                //
+                //
+                //
                 rooms_list.layoutManager = LinearLayoutManager(context)
                 rooms_list.setHasFixedSize(true)
         
+                
                 
         
                 //
@@ -112,11 +115,17 @@ class TabFragment: ParentFragment(), BaseView {
         private fun detailListener(i: Item) {
                 EventBus.getDefault().post(AgendaActivity_ProgressShow("Aguarde"))
                 doAsync {
-                        var result = app.agenda.retrieveTalk(i.talk?.id)
+                        val result = app.agenda.retrieveTalk(i.talk?.id)
                         
                         
                         uiThread {
                                 EventBus.getDefault().post(AgendaActivity_ProgressHide())
+                                
+                                if (result.type != ResultType.SUCCESS) {
+                                        EventBus.getDefault().post(AgendaActivity_ShowToast("w", "Houve um problema ao obter os detalhes, tente mais tarde."))
+                                        return@uiThread
+                                }
+                                
                                 updateDetails()
                         }
                 }
@@ -125,42 +134,41 @@ class TabFragment: ParentFragment(), BaseView {
         
 
         private fun updateDetails() {
-                val view = inflate(context, R.layout.dialog_talk_detail, null)
-                
                 try {
-                        view.dsd_title.text = app.agenda.talk.resource.title
-                        view.dsd_track.text = app.agenda.talk.resource.track.asHtml()
-                        view.dsd_owner.text = "${app.agenda.talk.resource.owner.name.toUpperCase()}<br>${app.agenda.talk.resource.owner.resume}".asHtml()
-                        
-                        
+                        val v = inflate(context, R.layout.dialog_talk_detail, null)
+                        v.dsd_title.text = app.agenda.talk.resource.title
+                        v.dsd_track.text = app.agenda.talk.resource.track.asHtml()
+                        v.dsd_owner.text = "${app.agenda.talk.resource.owner.name.toUpperCase()}<br>${app.agenda.talk.resource.owner.resume}".asHtml()
+        
+        
                         val co = mutableListOf<String>()
                         app.agenda.talk.resource.coauthors.forEach {
                                 co.add(it.name.toUpperCase())
                                 co.add(it.resume)
                         }
-                        view.dsd_coauthor.text = co.joinToString("<br>").asHtml()
-                        if (app.agenda.talk.resource.coauthors.isNotEmpty())
-                                view.dsd_coauthor.show()
-        
+                        v.dsd_coauthor.text = co.joinToString("<br>").asHtml()
+                        if (app.agenda.talk.resource.coauthors.isNotEmpty()) v.dsd_coauthor.show()
 
-                        view.dsd_local.text = "Dia <strong>${app.agenda.talk.resource.slots[0].begins.split("T")[0].split("-")[2]}</strong> às <strong>${app.agenda.talk.resource.slots[0].hour}h</strong> na sala <strong>${app.agenda.talk.resource.slots[0].roomName}</strong> (${app.agenda.talk.resource.slots[0].duration}min)".asHtml()
-                        view.dsd_description.text = app.agenda.talk.resource.full.asHtml()
-        
 
+                        v.dsd_local.text = "Dia <strong>${app.agenda.talk.resource.slots[0].begins.split("T")[0].split("-")[2]}</strong> às <strong>${app.agenda.talk.resource.slots[0].hour}h</strong> na sala <strong>${app.agenda.talk.resource.slots[0].roomName}</strong> (${app.agenda.talk.resource.slots[0].duration}min)".asHtml()
+                        v.dsd_description?.text = app.agenda.talk.resource.full.asHtml()
+        
                         
                         activity!!.alert {
-                                customView = view
+                                customView = v
                                 isCancelable = false
                 
                                 positiveButton("Fechar") {
                                         it.dismiss()
                                 }
                         }.show()
-                
+        
+        
+        
                 } catch (ex: Exception) {
                         Crashlytics.logException(ex)
                         
-                        EventBus.getDefault().post(AgendaActivity_ShowToast(""))
+                        //EventBus.getDefault().post(AgendaActivity_ShowToast("e", "Houve um problema ao obter os detalhes, tente mais tarde."))
                 }
         }
         
@@ -172,9 +180,9 @@ class TabFragment: ParentFragment(), BaseView {
         
         
         private fun alarmListener(i: Item, type: String) {
-                /**
-                 * configura o horário para o alarm
-                 */
+                //
+                // configura o horário para o alarm
+                //
                 val cal = Calendar.getInstance()
                 val yy = i.begins.split("T")[0].split("-")[0]
                 val mm = i.begins.split("T")[0].split("-")[1]
@@ -191,18 +199,15 @@ class TabFragment: ParentFragment(), BaseView {
                 
                 
                 
-                /**
-                 * acerta o dia do alarm
-                 */
-                var alertTime = cal.timeInMillis
-                
-                
-                
+
                 val alarm = AlarmBase().apply {
                         id = i.id
                         alarmID = i.alarmID
                         hour = cal.timeInMillis
                         title = i.talk?.title!!
+                        owner = i.talk?.owner!!
+                        track = i.talk?.track!!
+                        room = i.roomName
                 }
                 
                 
@@ -216,9 +221,9 @@ class TabFragment: ParentFragment(), BaseView {
         
                         app.alarms[alarm.id] = alarm
                         app.settings.alarms = app.alarms
-
-
-                        toastyShow("s", "Notificação adicionada.\nVocê será avisado 15 minutos antes do início da viagem.")
+        
+        
+                        EventBus.getDefault().post(AgendaActivity_ShowToast("s", "Notificação adicionada.\n\nVocê será avisado 15 minutos antes do início da palestra."))
                         
 
                         
@@ -228,7 +233,7 @@ class TabFragment: ParentFragment(), BaseView {
         
                         app.alarms.remove(alarm.id)
                         app.settings.alarms = app.alarms
-                        toastyShow("i", "Notificação cancelada.")
+                        EventBus.getDefault().post(AgendaActivity_ShowToast("i", "Notificação cancelada."))
                 }
         }
         

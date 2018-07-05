@@ -23,7 +23,7 @@ class AlarmSoundService: Service() {
                 super.onCreate()
         
                 //Start media player
-                mediaPlayer = MediaPlayer.create(this, R.raw.alarm_bus_break)
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm)
                 mediaPlayer!!.start()
                 
                 

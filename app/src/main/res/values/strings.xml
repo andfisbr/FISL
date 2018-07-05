@@ -8,7 +8,55 @@
         </array >
         
         
-        <string name="about"><![CDATA[
+        <array name="splash_backgrounds" >
+                <item >@drawable/ic_previous_1</item >
+                <item >@drawable/ic_previous_2</item >
+                <item >@drawable/ic_previous_3</item >
+                <item >@drawable/ic_previous_4</item >
+                <item >@drawable/ic_previous_5</item >
+                <item >@drawable/ic_previous_6</item >
+        </array >
+        
+        
+        <string name="about_app"><![CDATA[
+<h2>FISL2018 :: App oficial do 18º Fórum Internacional de Software Livre</h2>
+<p>O aplicativo foi construído com a finalidade de facilitar a consulta na agenda do evento.</p>
+<br>
+<h3>Características</h3>
+<p>
+<b>*</b> Informações básicas sobre o evento<br>
+<b>*</b> Navegação pela agenda do evento<br>
+<b>*</b> Informações mais detalhadas sobre as palestras e palestrantes<br>
+<b>*</b> Possibilidade de filtrar a agenda por TRILHA, PALESTRANTE ou TÍTULO<br>
+<b>*</b> Aviso através de notificações das palestras que você deseja assistir<br>
+</p>
+<p>Quanto as bibliotecas utilizadas, o app utiliza as básicas de desenvolvimento fornecidas pelo Google e Fabric.io e bibliotecas "open source" encontradas no GitHub.</p>
+<br>
+<br>
+<p>O aplicativo foi feito em tempo record, por isso contempla somente a navegação na agenda. Para o próximo FISL, novas características serão implementadas. Sugestões são bem-vindas.</p>
+
+<br>
+<br>
+<br>
+<h3>Licenciamento</h3>
+<p>
+MIT License<br>
+<br>
+Copyright © 2018 André Fischer<br>
+<br>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+<br>
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+<br>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+
+        ]]></string>
+        
+        
+        
+        
+        <string name="about" ><![CDATA[
 <h3>18 anos fortalecendo o conhecimento colaborativo e construindo tecnologias livres.</h3>
 <p>A cada ano o Fórum Internacional Software Livre vem se firmando como um local de discussão e exposição das principais novidades e inovações em tecnologias livres.</p>
 <p>Desde a primeira edição, o FISL tem como principal valor "a tecnologia que liberta", incentivando a manutenção da transparência na tecnologia, seja nos códigos, nos padrões abertos, no compartilhamento de conhecimento e na luta pela internet livre e neutra.</p>
@@ -91,5 +139,5 @@ Fone: (51) 3714-6653<br>
 E-mail: comercial ARROBA solis PONTO coop PONTO br<br>
 </p>
 ]]>
-        </string>
+        </string >
 </resources >

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AlarmActivity"
+        >
+        
+        
+        
+        <ImageView
+                android:id="@+id/notif_banner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_banner_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        
+        <ImageView
+                android:id="@+id/notifi_logo"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_logo_piece"
+                app:layout_constraintBottom_toBottomOf="@+id/notif_banner"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        
+        <View
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:background="#ddbfe7e7"
+                app:layout_constraintBottom_toBottomOf="@+id/notif_banner"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        
+        
+        
+        <RelativeLayout
+                android:id="@+id/notif_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                
+                <ImageView
+                        android:id="@+id/notif_back_button"
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_arrow_back_black_24dp"
+                        android:tint="@color/colorPrimary"
+                        />
+                
+                <TextView
+                        android:id="@+id/notif_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/notif_back_button"
+                        android:text="NOTIFICAÇÕES"
+                        android:textSize="18sp"
+                        />
+                
+        </RelativeLayout >
+        
+        
+        
+        
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/notif_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/notif_banner"
+                >
+                
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/notif_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        tools:listitem="@layout/notification_row"
+                        />
+        </android.support.v4.widget.SwipeRefreshLayout >
+
+        
+</android.support.constraint.ConstraintLayout >

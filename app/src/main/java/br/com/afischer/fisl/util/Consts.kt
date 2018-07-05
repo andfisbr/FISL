@@ -21,7 +21,6 @@ object Consts {
         
         const val PREFS_SETTINGS_DISMISSED_MESSAGES = "settings.dismissedMessages"
         const val PREFS_SETTINGS_FAVORITIES = "settings.favorities"
-        const val PREFS_SETTINGS_SHORTCUTS = "settings.shortcuts"
         const val PREFS_SETTINGS_ALARMS = "settings.alarms"
         const val PREFS_SETTINGS_AGENDA = "settings.agenda"
         

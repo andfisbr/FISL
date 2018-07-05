@@ -6,6 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#cc000000"
+        android:elevation="16dp"
+        tools:targetApi="lollipop"
         android:visibility="gone"
         >
         

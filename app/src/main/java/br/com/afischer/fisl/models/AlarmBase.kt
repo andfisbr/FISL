@@ -15,6 +15,9 @@ class AlarmBase {
         var alarmID: Int = -1
         var hour: Long = 0L
         var title: String = ""
+        var owner: String = ""
+        var track: String = ""
+        var room: String = ""
         
  
         
@@ -23,41 +26,40 @@ class AlarmBase {
         
         
         fun notificationCreate(ctx: Context?) {
-                /**
-                 * cria os intents
-                 */
+                //
+                // cria os intents
+                //
                 val alarmIntent = Intent(ctx!!, AlarmReceiver::class.java)
                 alarmIntent.putExtra("alarm", this.toJson())
                 
                 
                 
                 
-                /**
-                 * aciona os métodos corretos
-                 */
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        val pendingIntent = PendingIntent.getBroadcast(ctx, alarmID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                        ctx.alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, hour - 15.min(), pendingIntent)
-                
-                } else {
-                        val pendingIntent = PendingIntent.getBroadcast(ctx, alarmID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                        ctx.alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, hour - 15.min(), AlarmManager.INTERVAL_DAY, pendingIntent)
+                //
+                // aciona os métodos corretos
+                //
+                val pendingIntent = PendingIntent.getBroadcast(ctx, alarmID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        
+                when {
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> ctx.alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, hour - 15.min(), pendingIntent)
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> ctx.alarmManager.setExact(AlarmManager.RTC_WAKEUP, hour - 15.min(), pendingIntent)
+                        else -> ctx.alarmManager.set(AlarmManager.RTC_WAKEUP, hour - 15.min(), pendingIntent)
                 }
         }
         
         
         
         fun notificationDelete(ctx: Context?) {
-                /**
-                 * cria os intents
-                 */
+                //
+                // cria os intents
+                //
                 val alarmIntent = Intent(ctx!!, AlarmReceiver::class.java)
                 val pending = PendingIntent.getBroadcast(ctx, alarmID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         
         
-                /**
-                 * cancela alarms
-                 */
+                //
+                // cancela alarms
+                //
                 ctx.alarmManager.cancel(pending)
                 pending.cancel()
         }
