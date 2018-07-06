@@ -7,26 +7,28 @@
         android:orientation="vertical"
         >
         
-        <ImageView
-                android:id="@+id/na_exp_logo"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
-                />
-        
         <TextView
                 android:id="@+id/na_exp_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
-                android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="Hora"
+                />
+        
+        
+        <TextView
+                android:id="@+id/na_exp_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/na_exp_hour"
+                android:layout_toRightOf="@id/na_exp_hour"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="14sp"
+                tools:text="Data"
                 />
         
         
@@ -36,31 +38,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/na_exp_hour"
-                android:layout_toRightOf="@id/na_exp_hour"
+                android:layout_toEndOf="@id/na_exp_date"
+                android:layout_toRightOf="@id/na_exp_date"
                 android:fontFamily="sans-serif-condensed"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
-                android:textStyle="italic"
+                android:textStyle="bold"
                 tools:text="Sala"
                 />
         
         <TextView
                 android:id="@+id/na_exp_title"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/na_exp_hour"
-                android:layout_toLeftOf="@id/na_exp_logo"
-                android:layout_toStartOf="@id/na_exp_logo"
                 android:fontFamily="sans-serif-condensed"
-                android:lines="3"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
-                android:textStyle="italic"
                 tools:text="Título"
                 />
         
@@ -74,10 +68,12 @@
                 android:layout_below="@id/na_exp_title"
                 android:fontFamily="sans-serif-condensed"
                 android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
                 android:textStyle="italic"
                 tools:text="Palestrante"
+                android:layout_alignParentRight="true"
+                android:gravity="right|end"
+                android:layout_alignParentEnd="true"
                 />
         
         
@@ -88,13 +84,14 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/na_exp_owner"
-                android:background="@color/colorPrimary"
                 android:fontFamily="sans-serif-condensed"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
                 android:text="Trilha"
-                android:textColor="@color/white_smoke"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:gravity="right|end"
+                android:layout_alignParentEnd="true"
                 />
 
 

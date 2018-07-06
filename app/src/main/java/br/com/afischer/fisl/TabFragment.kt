@@ -8,7 +8,6 @@ import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
 import br.com.afischer.fisl.adapters.RoomsAdapter
-import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
@@ -28,7 +27,7 @@ import org.jetbrains.anko.uiThread
 import java.util.*
 
 
-class TabFragment: ParentFragment(), BaseView {
+class TabFragment: ParentFragment() {
         private var param: String = "09:00"
         private var adapter: RoomsAdapter? = null
         
@@ -217,7 +216,6 @@ class TabFragment: ParentFragment(), BaseView {
                 
                 if (type == "*") {
                         app.alarm.add(alarm)
-                        app.alarm.save()
                         app.alarm.notificationCreate(alarm)
         
         
@@ -227,7 +225,6 @@ class TabFragment: ParentFragment(), BaseView {
                         
                 } else if (type == "o") {
                         app.alarm.delete(alarm)
-                        app.alarm.save()
                         app.alarm.notificationDelete(alarm)
         
         

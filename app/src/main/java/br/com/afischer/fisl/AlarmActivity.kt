@@ -81,7 +81,6 @@ class AlarmActivity: ParentActivity() {
                 try {
                         app.alarm.notificationDelete(alarm)
                         app.alarm.delete(alarm)
-                        app.alarm.save()
                         
                         
                 } catch (ex: Exception) {

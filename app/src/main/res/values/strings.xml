@@ -140,4 +140,17 @@ E-mail: comercial ARROBA solis PONTO coop PONTO br<br>
 </p>
 ]]>
         </string >
+        
+        
+        
+        
+        <string name="about_dev"><![CDATA[
+<h3>André Fischer</h3>
+<p>Desenvolvedor do app FISL</p>
+<br>
+<br>
+<p>Analista de suporte da PROCERGS que, entre outras diversas atividades (marido, pai, filhas, hapkido, instrutor, truques com cartas, violão, etc.), ainda é entusiasta do desenvolvimento Android.</p>
+<p>Já possui alguns aplicativos publicados que facilitam muito o dia a dia de quem os usa - destaque para o GrünenKarte e o JáPassou?.</p>
+]]>
+        </string>
 </resources >

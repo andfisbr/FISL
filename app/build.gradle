@@ -11,8 +11,8 @@ android {
                 applicationId "br.com.afischer.fisl"
                 minSdkVersion 16
                 targetSdkVersion 27
-                versionCode 104
-                versionName "1.0.4"
+                versionCode 105
+                versionName "1.0.5"
                 
                 multiDexEnabled true
         }
@@ -67,6 +67,8 @@ dependencies {
         implementation( 'com.mikepenz:materialdrawer:6.0.8@aar' ) {
                 transitive = true
         }
+        implementation( 'de.hdodenhof:circleimageview:2.1.0' ) {}
+        
         
         
         

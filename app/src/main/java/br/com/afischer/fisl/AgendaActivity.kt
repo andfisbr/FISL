@@ -5,7 +5,6 @@ import android.os.Handler
 import android.widget.TextView
 import br.com.afischer.fisl.adapters.PagerAdapter
 import br.com.afischer.fisl.adapters.SearcherAdapter
-import br.com.afischer.fisl.bases.BaseView
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
@@ -26,16 +25,12 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
 
-class AgendaActivity: ParentActivity(), BaseView {
+class AgendaActivity: ParentActivity() {
         
         private var pagerAdapter: PagerAdapter? = null
         private val buttons = mutableListOf<TextView>()
         
-        private var isLastPageSwiped: Boolean = false
-        private var counterPageScroll: Int = -1
-        
-        
-        
+
         
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
@@ -351,26 +346,26 @@ class AgendaActivity: ParentActivity(), BaseView {
         
         
         private fun agendaUpdate() {
-                /**
-                 * obtém as trilhas da agenda antes do filtro
-                 */
+                //
+                // obtém as trilhas da agenda antes do filtro
+                //
                 app.agenda.doTracks()
         
         
 
                 
-                /**
-                 * filtra pela trilha escolhida
-                 */
+                //
+                // filtra pela trilha escolhida
+                //
                 app.agenda.doFilter()
         
         
                 
                 
                 
-                /**
-                 * monta as tabs das horas baseado no conteúdo filtrado
-                 */
+                //
+                // monta as tabs das horas baseado no conteúdo filtrado
+                //
                 initViewPager()
 
                 

@@ -185,11 +185,6 @@ class MainActivity: ParentActivity() {
         
         
         
-        private lateinit var itemAbout: PrimaryDrawerItem
-        private lateinit var itemAvalie: PrimaryDrawerItem
-        private lateinit var itemReload: PrimaryDrawerItem
-        
-        
         private fun initDrawer() {
                 initDrawerHeader()
                 
@@ -212,6 +207,7 @@ class MainActivity: ParentActivity() {
                                                         browse("https://play.google.com/store/apps/details?id=$packageName")
                                                 }
                                                 205 -> reloadAgenda()
+                                                206 -> startActivity<DevActivity>()
                                                 else -> false
                                         }
                                 }
@@ -226,10 +222,16 @@ class MainActivity: ParentActivity() {
         
         
         
+        private lateinit var itemAbout: PrimaryDrawerItem
+        private lateinit var itemAvalie: PrimaryDrawerItem
+        private lateinit var itemReload: PrimaryDrawerItem
+        private lateinit var itemDev: PrimaryDrawerItem
+        
         private fun initDrawerItems() {
                 itemAbout = PrimaryDrawerItem().withIdentifier(201).withName("Sobre").withSelectable(false).withIcon(R.drawable.ic_about_black_24dp).withIconTintingEnabled(true)
                 itemAvalie = PrimaryDrawerItem().withIdentifier(204).withName("Avalie-me no Google Play").withSelectable(false).withIcon(R.drawable.ic_star_black_24dp).withIconTintingEnabled(true)
                 itemReload = PrimaryDrawerItem().withIdentifier(205).withName("Recarregar agenda").withSelectable(false).withIcon(R.drawable.ic_calendar_reload_black_24dp).withIconTintingEnabled(true)
+                itemDev = PrimaryDrawerItem().withIdentifier(206).withName("Sobre o desenvolvedor").withSelectable(false).withIcon(R.drawable.ic_dev_black_24dp).withIconTintingEnabled(true)
                 
                 
                 mainDrawer!!.removeAllItems()
@@ -238,6 +240,8 @@ class MainActivity: ParentActivity() {
                         , DividerDrawerItem()
                         , itemAvalie
                         , itemAbout
+                        , DividerDrawerItem()
+                        , itemDev
                 )
         }
         

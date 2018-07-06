@@ -9,10 +9,11 @@ import android.support.v4.content.WakefulBroadcastReceiver
 import android.widget.RemoteViews
 import br.com.afischer.fisl.MainActivity
 import br.com.afischer.fisl.R
+import br.com.afischer.fisl.app.FISLApplication
 import br.com.afischer.fisl.extensions.fromJson
 import br.com.afischer.fisl.extensions.pad
-import br.com.afischer.fisl.util.Consts
 import br.com.afischer.fisl.models.AlarmBase
+import br.com.afischer.fisl.util.Consts
 import com.google.gson.Gson
 import org.jetbrains.anko.notificationManager
 import java.util.*
@@ -35,13 +36,16 @@ class AlarmNotificationService: IntentService("AlarmNotificationService") {
                 val cal = Calendar.getInstance()
                 cal.timeInMillis = alarm.hour
         
+                val yyyy = cal[Calendar.YEAR]
+                val MM = cal[Calendar.MONTH] + 1
+                val dd = cal[Calendar.DAY_OF_MONTH]
                 val hh = cal[Calendar.HOUR_OF_DAY]
                 val mm = cal[Calendar.MINUTE]
         
-
-
-
-
+        
+        
+        
+        
                 alarmNotificationManager = this.notificationManager
         
         
@@ -51,16 +55,19 @@ class AlarmNotificationService: IntentService("AlarmNotificationService") {
                 //
                 val contentCollapsed = RemoteViews(this.packageName, R.layout.notification_alarm_collapsed)
                 contentCollapsed.setTextViewText(R.id.na_col_hour, "${hh.pad("<00")}:${mm.pad("<00")}")
-                contentCollapsed.setTextViewText(R.id.na_col_title, alarm.title)
+                contentCollapsed.setTextViewText(R.id.na_col_date, "${dd.pad("<00")}/${MM.pad("<00")}/$yyyy")
                 contentCollapsed.setTextViewText(R.id.na_col_room, alarm.room)
+                contentCollapsed.setTextViewText(R.id.na_col_title, alarm.title)
         
-                
+        
+        
                 val contentExpanded = RemoteViews(this.packageName, R.layout.notification_alarm_expanded)
                 contentExpanded.setTextViewText(R.id.na_exp_hour, "${hh.pad("<00")}:${mm.pad("<00")}")
+                contentExpanded.setTextViewText(R.id.na_exp_date, "${dd.pad("<00")}/${MM.pad("<00")}/$yyyy")
+                contentExpanded.setTextViewText(R.id.na_exp_room, alarm.room)
                 contentExpanded.setTextViewText(R.id.na_exp_title, alarm.title)
                 contentExpanded.setTextViewText(R.id.na_exp_owner, alarm.owner)
                 contentExpanded.setTextViewText(R.id.na_exp_track, alarm.track.split(" - ")[1])
-                contentExpanded.setTextViewText(R.id.na_exp_room, alarm.room)
         
                 
                 
@@ -93,11 +100,20 @@ class AlarmNotificationService: IntentService("AlarmNotificationService") {
                 //
                 // notiy notification manager about new notification
                 //
-                alarmNotificationManager!!.notify(NOTIFICATION_ID, alamNotificationBuilder.build())
+                alarmNotificationManager!!.notify(System.currentTimeMillis().toInt(), alamNotificationBuilder.build())
         
         
         
         
                 WakefulBroadcastReceiver.completeWakefulIntent(intent)
+                
+                
+                
+                
+                //
+                // remove o alarm após o disparo
+                //
+                (application as FISLApplication).alarm.notificationDelete(alarm)
+                (application as FISLApplication).alarm.delete(alarm)
         }
 }

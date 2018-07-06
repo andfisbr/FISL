@@ -85,7 +85,7 @@ class Alarm(var app: FISLApplication) {
                                 return@forEach
                         
                         items.remove(it.id)
-                        app.settings.alarmItems = items
+                        save()
                 }
         }
         
@@ -95,10 +95,12 @@ class Alarm(var app: FISLApplication) {
         
         fun add(alarm: AlarmBase) {
                 items[alarm.id] = alarm
+                save()
         }
         
         fun delete(alarm: AlarmBase) {
                 items.remove(alarm.id)
+                save()
         }
         
         fun save() {
