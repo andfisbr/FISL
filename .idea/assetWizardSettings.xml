@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_hamburger_icon" />
-                            <entry key="sourceFile" value="C:\Users\andre-fischer\Desktop\fils\Hamburger_icon.svg" />
+                            <entry key="outputName" value="ic_star_black_24dp" />
+                            <entry key="sourceFile" value="C:\Users\andre-fischer\Desktop\fils\ic_star_black_24dp.svg" />
                           </map>
                         </option>
                       </PersistentState>

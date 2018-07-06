@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-        android:id="@+id/notificationrow_container"
+        android:id="@+id/alarmrow_container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -16,7 +16,7 @@
         
         
         <TextView
-                android:id="@+id/notificationrow_hour"
+                android:id="@+id/alarmrow_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -32,73 +32,71 @@
                 />
         
         <TextView
-                android:id="@+id/notificationrow_date"
+                android:id="@+id/alarmrow_date"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:textSize="16sp"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="@+id/notificationrow_hour"
-                app:layout_constraintStart_toEndOf="@+id/notificationrow_hour"
-                app:layout_constraintTop_toTopOf="@+id/notificationrow_hour"
+                app:layout_constraintBottom_toBottomOf="@+id/alarmrow_hour"
+                app:layout_constraintStart_toEndOf="@+id/alarmrow_hour"
+                app:layout_constraintTop_toTopOf="@+id/alarmrow_hour"
                 tools:text="Data"
                 />
         
         <TextView
-                android:id="@+id/notificationrow_room"
+                android:id="@+id/alarmrow_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:textAllCaps="true"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/notificationrow_hour"
-                app:layout_constraintStart_toEndOf="@+id/notificationrow_date"
-                app:layout_constraintTop_toTopOf="@+id/notificationrow_hour"
+                app:layout_constraintStart_toStartOf="@+id/alarmrow_hour"
+                app:layout_constraintTop_toBottomOf="@+id/alarmrow_hour"
                 tools:text="Sala"
                 android:textStyle="bold"
                 />
 
         <TextView
-                android:id="@+id/notificationrow_title"
+                android:id="@+id/alarmrow_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/notificationrow_hour"
-                app:layout_constraintTop_toBottomOf="@+id/notificationrow_hour"
+                app:layout_constraintStart_toStartOf="@+id/alarmrow_room"
+                app:layout_constraintTop_toBottomOf="@+id/alarmrow_room"
                 tools:text="Título"
                 />
         
        
 
         <TextView
-                android:id="@+id/notificationrow_owner"
+                android:id="@+id/alarmrow_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notificationrow_title"
+                app:layout_constraintTop_toBottomOf="@+id/alarmrow_title"
                 tools:text="Palestrante"
                 />
         
         <TextView
-                android:id="@+id/notificationrow_track"
+                android:id="@+id/alarmrow_track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notificationrow_owner"
+                app:layout_constraintTop_toBottomOf="@+id/alarmrow_owner"
                 android:textColor="@color/colorPrimaryDark"
                 tools:text="Track"
                 />
         
         <ImageView
-                android:id="@+id/notificationrow_del"
+                android:id="@+id/alarmrow_del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"

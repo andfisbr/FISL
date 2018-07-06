@@ -4,13 +4,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.widget.Toast
 import com.blankj.utilcode.util.AppUtils
-import org.jetbrains.anko.activityManager
 import org.jetbrains.anko.browse
 
-
-
-
-fun Context.isServiceRunning(serviceClass: Class<*>): Boolean = activityManager.getRunningServices(Integer.MAX_VALUE)!!.any { serviceClass.name == it.service.className }
 
 
 
@@ -49,6 +44,3 @@ fun Context.whatsapp(phone: String, message: String) {
                 }
         }
 }
-
-
-

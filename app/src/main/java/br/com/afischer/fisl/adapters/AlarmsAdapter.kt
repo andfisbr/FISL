@@ -8,12 +8,12 @@ import br.com.afischer.fisl.R
 import br.com.afischer.fisl.extensions.asColor
 import br.com.afischer.fisl.extensions.inflate
 import br.com.afischer.fisl.extensions.pad
-import br.com.afsystems.japassou.models.AlarmBase
-import kotlinx.android.synthetic.main.notification_row.view.*
+import br.com.afischer.fisl.models.AlarmBase
+import kotlinx.android.synthetic.main.alarm_row.view.*
 import java.util.*
 
 
-class NotificationsAdapter(var activity: Activity, private var list: MutableList<AlarmBase>, var listener: (a: AlarmBase) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AlarmsAdapter(var activity: Activity, private var list: MutableList<AlarmBase>, var listener: (a: AlarmBase) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         
         companion object {
                 private const val TYPE_HEADER = 0
@@ -24,18 +24,18 @@ class NotificationsAdapter(var activity: Activity, private var list: MutableList
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
                 TYPE_HEADER -> {
-                        val itemView = parent.inflate(R.layout.notification_header)
+                        val itemView = parent.inflate(R.layout.alarm_header)
                         HeaderViewHolder(itemView)
                 }
                 
                 TYPE_ITEM -> {
-                        val itemView = parent.inflate(R.layout.notification_row)
+                        val itemView = parent.inflate(R.layout.alarm_row)
                         ItemViewHolder(itemView)
                 }
                 
                 
                 TYPE_FOOTER -> {
-                        val itemView = parent.inflate(R.layout.notification_footer)
+                        val itemView = parent.inflate(R.layout.alarm_footer)
                         FooterViewHolder(itemView)
                 }
                 
@@ -80,9 +80,9 @@ class NotificationsAdapter(var activity: Activity, private var list: MutableList
         inner class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
                 fun bind(item: AlarmBase, position: Int) = with(itemView) {
         
-                        notificationrow_container.setBackgroundColor(R.color.white_smoke.asColor(activity))
+                        alarmrow_container.setBackgroundColor(R.color.white_smoke.asColor(activity))
                         if (position % 2 == 0)
-                                notificationrow_container.setBackgroundColor(R.color.grey_300.asColor(activity))
+                                alarmrow_container.setBackgroundColor(R.color.grey_300.asColor(activity))
         
         
         
@@ -97,16 +97,16 @@ class NotificationsAdapter(var activity: Activity, private var list: MutableList
 
 
 
-                        notificationrow_hour.text = "${hh.pad("<00")}:${mm.pad("<00")}"
-                        notificationrow_date.text = "${dd.pad("<00")}/${MM.pad("<00")}/$yyyy"
+                        alarmrow_hour.text = "${hh.pad("<00")}:${mm.pad("<00")}"
+                        alarmrow_date.text = "${dd.pad("<00")}/${MM.pad("<00")}/$yyyy"
         
-                        notificationrow_title.text = item.title
-                        notificationrow_room.text = item.room
-                        notificationrow_owner.text = item.owner
-                        notificationrow_track.text = item.track.split(" - ")[1]
+                        alarmrow_title.text = item.title
+                        alarmrow_room.text = item.room
+                        alarmrow_owner.text = item.owner
+                        alarmrow_track.text = item.track.split(" - ")[1]
                         
 
-                        notificationrow_del.setOnClickListener {
+                        alarmrow_del.setOnClickListener {
                                 listener(item)
                         }
                 }

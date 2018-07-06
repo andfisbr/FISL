@@ -16,19 +16,19 @@ class FISLReceiver: BroadcastReceiver() {
                                 //
                                 // apaga todos os alarms atuais
                                 //
-                                app.alarmsClear(true)
+                                app.alarm.clear(true)
         
         
                                 //
                                 // recria os alarms
                                 //
-                                app.alarmsSchedule()
+                                app.alarm.schedule()
         
         
                                 //
                                 // atualiza os alarms no firebase
                                 //
-                                app.alarmsUpdate()
+                                app.alarm.update()
                         }
                 }
         }

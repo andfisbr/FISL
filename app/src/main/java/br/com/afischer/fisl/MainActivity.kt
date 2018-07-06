@@ -48,7 +48,7 @@ class MainActivity: ParentActivity() {
                 super.onActivityResult(requestCode, resultCode, data)
 
                 if (resultCode == 1000) {
-                        app.agendaLoad()
+                        app.agenda.doLoad()
                         app.agenda.doKeywords()
                 }
         }
@@ -195,7 +195,7 @@ class MainActivity: ParentActivity() {
                 
                 
                 val drawerBuilder = DrawerBuilder()
-                        .withDisplayBelowStatusBar(true)
+                        .withDisplayBelowStatusBar(false)
                         .withActivity(this@MainActivity)
                         .withHeader(R.layout.drawer_header)
                         .withOnDrawerItemClickListener { _, _, drawerItem ->
@@ -227,9 +227,9 @@ class MainActivity: ParentActivity() {
         
         
         private fun initDrawerItems() {
-                itemAbout = PrimaryDrawerItem().withIdentifier(201).withName("Sobre").withSelectable(false)
-                itemAvalie = PrimaryDrawerItem().withIdentifier(204).withName("Avalie-me no Google Play").withSelectable(false)
-                itemReload = PrimaryDrawerItem().withIdentifier(205).withName("Recarregar agenda").withSelectable(false)
+                itemAbout = PrimaryDrawerItem().withIdentifier(201).withName("Sobre").withSelectable(false).withIcon(R.drawable.ic_about_black_24dp).withIconTintingEnabled(true)
+                itemAvalie = PrimaryDrawerItem().withIdentifier(204).withName("Avalie-me no Google Play").withSelectable(false).withIcon(R.drawable.ic_star_black_24dp).withIconTintingEnabled(true)
+                itemReload = PrimaryDrawerItem().withIdentifier(205).withName("Recarregar agenda").withSelectable(false).withIcon(R.drawable.ic_calendar_reload_black_24dp).withIconTintingEnabled(true)
                 
                 
                 mainDrawer!!.removeAllItems()

@@ -32,7 +32,7 @@ class SplashActivity: ParentActivity() {
                 //
                 // reprograma os alarms
                 //
-                app.alarmsSchedule()
+                app.alarm.schedule()
         
         
                 

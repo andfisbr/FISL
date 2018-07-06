@@ -2,8 +2,8 @@ package br.com.afischer.fisl
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import br.com.afischer.fisl.adapters.NotificationsAdapter
-import br.com.afsystems.japassou.models.AlarmBase
+import br.com.afischer.fisl.adapters.AlarmsAdapter
+import br.com.afischer.fisl.models.AlarmBase
 import com.crashlytics.android.Crashlytics
 import kotlinx.android.synthetic.main.activity_alarm.*
 
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_alarm.*
 
 
 class AlarmActivity: ParentActivity() {
-        private var adapter: NotificationsAdapter? = null
+        private var adapter: AlarmsAdapter? = null
         
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
@@ -26,18 +26,18 @@ class AlarmActivity: ParentActivity() {
 
 
         private fun initViews() {
-                notif_list.layoutManager = LinearLayoutManager(this)
-                notif_list.setHasFixedSize(true)
+                alarm_list.layoutManager = LinearLayoutManager(this)
+                alarm_list.setHasFixedSize(true)
                 
-                notif_refresh.setOnRefreshListener {
+                alarm_refresh.setOnRefreshListener {
                         setupNotifications()
                 }
         
         
-                notif_back_button.setOnClickListener {
+                alarm_back_button.setOnClickListener {
                         finish()
                 }
-                notif_toolbar_title.setOnClickListener {
+                alarm_toolbar_title.setOnClickListener {
                         finish()
                 }
         }
@@ -55,21 +55,22 @@ class AlarmActivity: ParentActivity() {
         
         private fun updateAlarms() {
                 val aux = mutableListOf<AlarmBase>()
-                if (app.alarms.isNotEmpty())
-                        app.alarms.values.map { aux.add(it) }
+                if (app.alarm.items.isNotEmpty()) {
+                        app.alarm.items.values.map { aux.add(it) }
+                }
                 
-                adapter = NotificationsAdapter(
+                adapter = AlarmsAdapter(
                         activity = this,
-                        list = aux.sortedWith(compareBy<AlarmBase> { it.hour }.thenBy { it.title }).toMutableList(),
+                        list = aux.sortedWith(compareBy({ it.hour }, { it.title })).toMutableList(),
                         listener = { a -> alarmDelete(a) }
                 )
                 
                 
-                notif_list?.let {
+                alarm_list?.let {
                         it.adapter = adapter
                 }
                 
-                notif_refresh?.isRefreshing = false
+                alarm_refresh?.isRefreshing = false
         }
         
         
@@ -78,9 +79,9 @@ class AlarmActivity: ParentActivity() {
         
         private fun alarmDelete(alarm: AlarmBase) {
                 try {
-                        alarm.notificationDelete(this)
-                        app.alarms.remove(alarm.id)
-                        app.settings.alarms = app.alarms
+                        app.alarm.notificationDelete(alarm)
+                        app.alarm.delete(alarm)
+                        app.alarm.save()
                         
                         
                 } catch (ex: Exception) {

@@ -12,7 +12,7 @@ import br.com.afischer.fisl.R
 import br.com.afischer.fisl.extensions.fromJson
 import br.com.afischer.fisl.extensions.pad
 import br.com.afischer.fisl.util.Consts
-import br.com.afsystems.japassou.models.AlarmBase
+import br.com.afischer.fisl.models.AlarmBase
 import com.google.gson.Gson
 import org.jetbrains.anko.notificationManager
 import java.util.*

@@ -4,6 +4,7 @@ import br.com.afischer.fisl.app.FISLApplication
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.extensions.fromJson
 import br.com.afischer.fisl.extensions.pad
+import br.com.afischer.fisl.util.Consts
 import com.crashlytics.android.Crashlytics
 import com.google.gson.Gson
 
@@ -83,10 +84,11 @@ class Agenda (var app: FISLApplication) {
         
         
         fun doSave() {
-                app.agendaSave()
+                app.prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(items)).apply()
         }
         fun doLoad() {
-                app.agendaLoad()
+                val t1a = mutableListOf<Item>()
+                items = Gson().fromJson(app.prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
         }
         
         

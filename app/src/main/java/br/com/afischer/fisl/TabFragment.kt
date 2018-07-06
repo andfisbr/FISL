@@ -15,8 +15,8 @@ import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
 import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
 import br.com.afischer.fisl.events.AgendaActivity_ShowToast
 import br.com.afischer.fisl.extensions.asHtml
+import br.com.afischer.fisl.models.AlarmBase
 import br.com.afischer.fisl.models.Item
-import br.com.afsystems.japassou.models.AlarmBase
 import com.crashlytics.android.Crashlytics
 import com.pawegio.kandroid.show
 import kotlinx.android.synthetic.main.dialog_talk_detail.view.*
@@ -216,11 +216,9 @@ class TabFragment: ParentFragment(), BaseView {
                 
                 
                 if (type == "*") {
-                        alarm.notificationCreate(this.activity)
-        
-        
-                        app.alarms[alarm.id] = alarm
-                        app.settings.alarms = app.alarms
+                        app.alarm.add(alarm)
+                        app.alarm.save()
+                        app.alarm.notificationCreate(alarm)
         
         
                         EventBus.getDefault().post(AgendaActivity_ShowToast("s", "Notificação adicionada.\n\nVocê será avisado 15 minutos antes do início da palestra."))
@@ -228,13 +226,12 @@ class TabFragment: ParentFragment(), BaseView {
 
                         
                 } else if (type == "o") {
-                        alarm.notificationDelete(this.activity)
+                        app.alarm.delete(alarm)
+                        app.alarm.save()
+                        app.alarm.notificationDelete(alarm)
         
         
-                        app.alarms.remove(alarm.id)
-                        app.settings.alarms = app.alarms
                         EventBus.getDefault().post(AgendaActivity_ShowToast("i", "Notificação cancelada."))
                 }
         }
-        
 }

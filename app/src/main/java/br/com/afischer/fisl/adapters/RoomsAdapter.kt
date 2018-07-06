@@ -136,10 +136,10 @@ class RoomsAdapter(
                                  */
                                 roomrow_notifyme.setImageResource(R.drawable.ic_notification_outline_black_24dp)
                                 roomrow_notifyme.contentDescription = "o"
-                                if (app.alarms.containsKey(item.id)) {
+                                if (app.alarm.contains(item.id)) {
                                         roomrow_notifyme.setImageResource(R.drawable.ic_notifications_black_24dp)
                                         roomrow_notifyme.contentDescription = "*"
-                                        item.alarmID = app.alarms[item.id]!!.alarmID
+                                        item.alarmID = app.alarm.get(item.id).alarmID
                                 }
                                 roomrow_notifyme.setOnClickListener {
                                         if (it.contentDescription == "o" ) {
