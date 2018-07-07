@@ -7,6 +7,7 @@ import android.widget.ImageView
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.extensions.asHtml
 import br.com.afischer.fisl.extensions.asString
+import com.blankj.utilcode.util.NetworkUtils
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -44,6 +45,14 @@ class MainActivity: ParentActivity() {
         }
         
         
+        override fun onResume() {
+                super.onResume()
+                
+                if (!NetworkUtils.isConnected()) {
+                        toastyShow("i", "Você está sem conexão com a Internet. A agenda não pode ser carregada. Verifique sua conexão.")
+                }
+        }
+        
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
                 super.onActivityResult(requestCode, resultCode, data)
 
@@ -61,7 +70,7 @@ class MainActivity: ParentActivity() {
         private fun initListeners() {
                 main_calendar_button.setOnClickListener {
                         if (app.agenda.items.isEmpty()) {
-                                toastyShow("w", "A agenda não foi carregada corretamente. Tente recarregá-la através do menu.")
+                                toastyShow("i", "A agenda não foi carregada corretamente. Tente recarregá-la através do menu.")
                                 return@setOnClickListener
                         }
                         
@@ -265,13 +274,15 @@ class MainActivity: ParentActivity() {
         
         private fun reloadAgenda() {
                 progressShow("Aguarde")
+                
                 doAsync {
                         val result = app.agenda.retrieve()
                 
                 
                         uiThread {
                                 if (result.type != ResultType.SUCCESS) {
-                                        toastyShow("w", "Problemas ao obter a agenda. Tente mais tarde.")
+                                        progressHide()
+                                        toastyShow("w", "Problemas ao obter a agenda. Verifique sua conexão com a Internet e tente outra vez.")
                                         return@uiThread
                                 }
 

@@ -8,6 +8,7 @@ import br.com.afischer.fisl.models.Agenda
 import br.com.afischer.fisl.models.Alarm
 import br.com.afischer.fisl.models.Settings
 import br.com.afischer.fisl.util.Consts
+import com.blankj.utilcode.util.Utils
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 
@@ -28,7 +29,9 @@ class FISLApplication: MultiDexApplication() {
         override fun onCreate() {
                 super.onCreate()
                 Fabric.with(this, Crashlytics())
-
+                Utils.init(this)
+                
+                
 
                 prefs = applicationContext.getSharedPreferences(Consts.PREFS_LOCAL, Context.MODE_PRIVATE)
 

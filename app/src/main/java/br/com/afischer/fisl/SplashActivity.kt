@@ -30,16 +30,14 @@ class SplashActivity: ParentActivity() {
                 
                 
                 //
-                // reprograma os alarms
+                // reprograma os alarmes
                 //
                 app.alarm.schedule()
         
         
                 
                 
-        
-                
-                
+
                 
                 //
                 // obtém a agenda completa da internet
