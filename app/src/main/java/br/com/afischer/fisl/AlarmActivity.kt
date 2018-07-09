@@ -81,12 +81,14 @@ class AlarmActivity: ParentActivity() {
                 try {
                         app.alarm.notificationDelete(alarm)
                         app.alarm.delete(alarm)
+        
                         
+        
                         
                 } catch (ex: Exception) {
                         Crashlytics.logException(ex)
                         
-                        toastyShow("e", "Ops, houve um problema ao excluir a notificação.")
+                        alerterShow("e", "Ops, houve um problema ao excluir a notificação.")
                 }
                 
                 updateAlarms()

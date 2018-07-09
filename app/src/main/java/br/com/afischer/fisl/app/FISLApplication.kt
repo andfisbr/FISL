@@ -7,6 +7,7 @@ import br.com.afischer.fisl.BuildConfig
 import br.com.afischer.fisl.models.Agenda
 import br.com.afischer.fisl.models.Alarm
 import br.com.afischer.fisl.models.Settings
+import br.com.afischer.fisl.models.Summary
 import br.com.afischer.fisl.util.Consts
 import com.blankj.utilcode.util.Utils
 import com.crashlytics.android.Crashlytics
@@ -16,6 +17,7 @@ import io.fabric.sdk.android.Fabric
 class FISLApplication: MultiDexApplication() {
         lateinit var agenda: Agenda
         lateinit var alarm: Alarm
+        lateinit var summary: Summary
         
 
         lateinit var prefs: SharedPreferences
@@ -40,6 +42,9 @@ class FISLApplication: MultiDexApplication() {
                 
                 agenda = Agenda(this)
                 alarm = Alarm(this)
+                summary = Summary()
+                
+                
 
 
                 settings = Settings(prefs)

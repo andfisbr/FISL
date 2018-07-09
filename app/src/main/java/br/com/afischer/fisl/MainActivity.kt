@@ -7,6 +7,7 @@ import android.widget.ImageView
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.extensions.asHtml
 import br.com.afischer.fisl.extensions.asString
+import br.com.afischer.fisl.models.FISLResult
 import com.blankj.utilcode.util.NetworkUtils
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -49,7 +50,7 @@ class MainActivity: ParentActivity() {
                 super.onResume()
                 
                 if (!NetworkUtils.isConnected()) {
-                        toastyShow("i", "Você está sem conexão com a Internet. A agenda não pode ser carregada. Verifique sua conexão.")
+                        alerterShow("w", "Você está sem conexão com a Internet. A agenda não pode ser carregada. Verifique.")
                 }
         }
         
@@ -70,12 +71,47 @@ class MainActivity: ParentActivity() {
         private fun initListeners() {
                 main_calendar_button.setOnClickListener {
                         if (app.agenda.items.isEmpty()) {
-                                toastyShow("i", "A agenda não foi carregada corretamente. Tente recarregá-la através do menu.")
+                                alerterShow("w", "A agenda não foi carregada corretamente. Tente recarregá-la através do menu.")
                                 return@setOnClickListener
                         }
                         
+                        if (!NetworkUtils.isConnected()) {
+                                alerterShow("w", "Você está sem conexão com a Internet. Verifique.")
+                                return@setOnClickListener
+                        }
+        
+        
+                        
+                        
+        
                         val i = Intent(this, AgendaActivity::class.java)
-                        startActivityForResult(i, 1000)
+
+                        
+                        
+                        //
+                        // verifica se a agenda não mudou
+                        //
+                        progressShow("Aguarde\nprocurando por atualizações")
+
+                        doAsync {
+                                var result = FISLResult(ResultType.SUCCESS)
+
+                                app.agenda.retrieveSummary()
+                                if (app.agenda.summary!!.hashCode() != app.summary.hashCode()) {
+                                        app.summary = app.agenda.summary!!
+                                        result = app.agenda.retrieve()
+                                }
+
+                                
+                                uiThread {
+                                        progressHide()
+                                        if (result.type == ResultType.SUCCESS) {
+                                                app.agenda.doKeywords()
+                                                app.agenda.doSave()
+                                        }
+                                        startActivityForResult(i, 1000)
+                                }
+                        }
                 }
                 
                 
@@ -282,7 +318,7 @@ class MainActivity: ParentActivity() {
                         uiThread {
                                 if (result.type != ResultType.SUCCESS) {
                                         progressHide()
-                                        toastyShow("w", "Problemas ao obter a agenda. Verifique sua conexão com a Internet e tente outra vez.")
+                                        alerterShow("w", "Problemas ao obter a agenda. Verifique sua conexão com a Internet e tente outra vez.")
                                         return@uiThread
                                 }
 
@@ -291,7 +327,7 @@ class MainActivity: ParentActivity() {
                                 
                                 
                                 progressHide()
-                                toastyShow("s", "Agenda recarregada.")
+                                alerterShow("s", "Agenda recarregada.")
                         }
                 }
         }

@@ -21,6 +21,13 @@
         <color name="back3">#8bc4c4</color>
         
         
+        <color name="warning_background">#FF9800</color>
+        <color name="information_background">#3F51B5</color>
+        <color name="error_background">#D32F2F</color>
+        <color name="success_background">#388E3C</color>
+        <color name="normal_background">#3D3A3A</color>
+        
+        
         
         <color name="red_50">#FFEBEE</color>
         <color name="red_100">#FFCDD2</color>

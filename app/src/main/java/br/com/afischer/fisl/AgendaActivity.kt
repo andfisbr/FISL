@@ -5,7 +5,6 @@ import android.os.Handler
 import android.widget.TextView
 import br.com.afischer.fisl.adapters.PagerAdapter
 import br.com.afischer.fisl.adapters.SearcherAdapter
-import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
 import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
@@ -20,9 +19,7 @@ import kotlinx.android.synthetic.main.activity_agenda.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundResource
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.uiThread
 
 
 class AgendaActivity: ParentActivity() {
@@ -41,6 +38,9 @@ class AgendaActivity: ParentActivity() {
                 buttons.add(agenda_day12)
                 buttons.add(agenda_day13)
                 buttons.add(agenda_day14)
+                
+                
+                
                 
                 
                 
@@ -321,30 +321,6 @@ class AgendaActivity: ParentActivity() {
         
         
         
-        private fun agendaInit() {
-                progressShow()
-        
-                doAsync {
-                        val result = app.agenda.retrieve(app.agenda.day)
-        
-        
-                        uiThread {
-                                if (result.type != ResultType.SUCCESS) {
-                                        progressHide()
-                                        toastyShow("e", "Houve um imprevisto na obtenção da agenda, tente mais tarde.")
-                                        return@uiThread
-                                }
-        
-                                agendaUpdate()
-                        }
-                }
-        }
-        
-        
-        
-        
-        
-        
         private fun agendaUpdate() {
                 //
                 // obtém as trilhas da agenda antes do filtro
@@ -403,7 +379,7 @@ class AgendaActivity: ParentActivity() {
         
 
         @Subscribe fun onEvent(event: AgendaActivity_ShowToast) {
-                toastyShow(event.type, event.message)
+                alerterShow(event.type, event.message)
         }
         
 

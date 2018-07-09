@@ -11,6 +11,8 @@ import com.google.gson.Gson
 class Agenda (var app: FISLApplication) {
         var items = mutableListOf<Item>()
         
+        var summary: Summary? = null
+        
         
         var aux: MutableList<Item> = mutableListOf()
         var tracks: MutableList<String> = mutableListOf()
@@ -79,6 +81,12 @@ class Agenda (var app: FISLApplication) {
                 
                 return FISLResult(ResultType.SUCCESS)
         }
+        
+        
+        
+        
+        
+        
         
         
         
@@ -192,6 +200,31 @@ class Agenda (var app: FISLApplication) {
         }
         
         
+
+        fun retrieveSummary(listener: () -> Unit = {}): FISLResult {
+                summary = Summary()
+                
+                
+                //
+                // obtem do servidor as informações
+                //
+                try {
+                        result = site.get(site.url.summary)
+                        if (result == "") {
+                                return FISLResult(ResultType.NO_RESPONSE, "[NO_RESPONSE] Sem resposta do website")
+                        }
+                        
+                        summary = Gson().fromJson(result)
+                        
+                } catch (ex: Exception) {
+                        Crashlytics.logException(ex)
+                        return FISLResult(ResultType.EXCEPTION, "[EXCEPTION] Problemas ao obter o resumo")
+                }
+                
+                
+                listener()
+                return FISLResult(ResultType.SUCCESS)
+        }
         
         
 }
