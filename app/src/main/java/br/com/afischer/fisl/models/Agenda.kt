@@ -7,6 +7,7 @@ import br.com.afischer.fisl.extensions.pad
 import br.com.afischer.fisl.util.Consts
 import com.crashlytics.android.Crashlytics
 import com.google.gson.Gson
+import org.jsoup.Jsoup
 
 class Agenda (var app: FISLApplication) {
         var items = mutableListOf<Item>()
@@ -16,7 +17,7 @@ class Agenda (var app: FISLApplication) {
         
         var aux: MutableList<Item> = mutableListOf()
         var tracks: MutableList<String> = mutableListOf()
-        var talk: TalkDetail = TalkDetail()
+        var talk: Talk = Talk()
         var keywords: MutableList<Keyword> = mutableListOf()
         
         
@@ -35,6 +36,8 @@ class Agenda (var app: FISLApplication) {
         
         
         fun retrieve(day: String = ""): FISLResult {
+                result = ""
+        
                 items.clear()
                 
                 
@@ -92,11 +95,21 @@ class Agenda (var app: FISLApplication) {
         
         
         fun doSave() {
-                app.prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(items)).apply()
+                try {
+                        app.prefs.edit().putString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(items)).apply()
+                        
+                } catch(ex: Exception) {
+                        Crashlytics.logException(ex)
+                }
         }
         fun doLoad() {
-                val t1a = mutableListOf<Item>()
-                items = Gson().fromJson(app.prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
+                try {
+                        val t1a = mutableListOf<Item>()
+                        items = Gson().fromJson(app.prefs.getString(Consts.PREFS_SETTINGS_AGENDA, Gson().toJson(t1a)))
+                        
+                } catch(ex: Exception) {
+                        Crashlytics.logException(ex)
+                }
         }
         
         
@@ -106,30 +119,26 @@ class Agenda (var app: FISLApplication) {
                 //
                 // acerta as keywords para os filtros
                 //
-                items.forEach { item ->
-                        if (item.talk == null) {
-                                return@forEach
+                val aux = mutableListOf<Item>()
+                aux.addAll(items)
+                
+                aux.forEachIndexed { i, a ->
+                        if (a.talk == null) {
+                                return@forEachIndexed
                         }
                         
-                        val title = item.talk?.title!!.toLowerCase()
-                        val owner = item.talk?.owner!!.toLowerCase()
-                        val track = item.talk?.track!!.toLowerCase().split(" - ")[1]
-                        item.keywords.add(title)
-                        item.keywords.add(owner)
-                        item.keywords.add(track)
+                        val title = a.talk?.title!!.toLowerCase()
+                        val owner = a.talk?.owner!!.toLowerCase()
+                        val track = a.talk?.track!!.toLowerCase().split(" - ")[1]
+                        if (items[i].keywords.none { it == title }) { items[i].keywords.add(title) }
+                        if (items[i].keywords.none { it == owner }) { items[i].keywords.add(owner) }
+                        if (items[i].keywords.none { it == track }) { items[i].keywords.add(track) }
                         
                         
-                        if (keywords.none { it.text == title }) {
-                                keywords.add(Keyword(title, "título"))
-                        }
                         
-                        if (keywords.none { it.text == owner }) {
-                                keywords.add(Keyword(owner, "palestrante"))
-                        }
-                        
-                        if (keywords.none { it.text == track }) {
-                                keywords.add(Keyword(track, "trilha"))
-                        }
+                        if (keywords.none { it.text == title }) { keywords.add(Keyword(title, "título")) }
+                        if (keywords.none { it.text == owner }) { keywords.add(Keyword(owner, "palestrante")) }
+                        if (keywords.none { it.text == track }) { keywords.add(Keyword(track, "trilha")) }
                 }
         }
         
@@ -180,6 +189,8 @@ class Agenda (var app: FISLApplication) {
         
         
         fun retrieveTalk(id: Int?): FISLResult {
+                result = ""
+        
                 try {
                         result = site.get(site.url.talk.format(id.toString()))
                         if (result == "") {
@@ -202,6 +213,8 @@ class Agenda (var app: FISLApplication) {
         
 
         fun retrieveSummary(listener: () -> Unit = {}): FISLResult {
+                result = ""
+        
                 summary = Summary()
                 
                 
@@ -226,5 +239,35 @@ class Agenda (var app: FISLApplication) {
                 return FISLResult(ResultType.SUCCESS)
         }
         
+        
+        
+        
+        
+        
+        fun retrieveAbout(): FISLResult {
+                result = ""
+                
+                try {
+                        result = site.get(site.url.about)
+                        if (result == "") {
+                                return FISLResult(ResultType.NO_RESPONSE, "[NO_RESPONSE] Sem resposta do website")
+                        }
+                
+                        
+                        val doc = Jsoup.parse(result)
+                        val html = doc.select("#sobre").html()
+                        
+                        app.about = html.replace("><strong>", ">").replace("</strong><", "<").replace("</strong>:<", "<")
+                        
+                        
+                
+                } catch (ex: Exception) {
+                        Crashlytics.logException(ex)
+                        return FISLResult(ResultType.EXCEPTION, "[EXCEPTION] Problemas ao obter o sobre")
+                }
+        
+        
+                return FISLResult(ResultType.SUCCESS)
+        }
         
 }

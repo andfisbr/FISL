@@ -3,6 +3,7 @@ package br.com.afischer.fisl
 import android.os.Bundle
 import br.com.afischer.fisl.adapters.TextTagsAdapter
 import br.com.afischer.fisl.enums.ResultType
+import br.com.afischer.fisl.models.FISLResult
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
@@ -55,15 +56,34 @@ class SplashActivity: ParentActivity() {
                 
 
                 
-                //
-                // obtém a agenda completa da internet
-                //
                 doAsync {
+                        var result = FISLResult(ResultType.SUCCESS)
+        
+        
+        
+                        //
+                        // atualiza o sobre
+                        //
+                        app.agenda.retrieveAbout()
+
+
+
+
+                        //
+                        // obtém a agenda completa da internet somente se ela foi alterada
+                        //
                         app.agenda.retrieveSummary()
-                        app.summary = app.agenda.summary!!
+                        if (app.agenda.summary!!.hashCode() != app.summaryHashCode) {
+                                app.summaryHashCode = app.agenda.summary!!.hashCode()
+                                app.settings.agendaSummaryHashCode = app.summaryHashCode
+        
+                                result = app.agenda.retrieve()
+                        }
                         
                         
-                        val result = app.agenda.retrieve()
+                        
+                        
+                        
                         
                         
                         

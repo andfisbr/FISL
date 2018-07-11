@@ -21,6 +21,7 @@ object Consts {
         
         const val PREFS_SETTINGS_ALARMS = "settings.alarms"
         const val PREFS_SETTINGS_AGENDA = "settings.agenda"
+        const val PREFS_SETTINGS_SUMMARY = "settings.summary"
         
         
         const val ACTION_MAIN = "br.com.afischer.fisl.action.main"

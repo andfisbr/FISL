@@ -24,6 +24,13 @@ class Settings(private var prefs: SharedPreferences) {
                 }
         
         
+        var agendaSummaryHashCode: Int = 0
+                set(value) {
+                        field = value
+                        if (!loading) prefs.edit().putInt(Consts.PREFS_SETTINGS_SUMMARY, field).apply()
+                }
+        
+        
         
         
         fun load() {
@@ -34,6 +41,9 @@ class Settings(private var prefs: SharedPreferences) {
                 
                 val t2a = mutableMapOf<Int, AlarmBase>()
                 alarmItems = Gson().fromJson(prefs.getString(Consts.PREFS_SETTINGS_ALARMS, Gson().toJson(t2a)))
+                
+                
+                agendaSummaryHashCode = prefs.getInt(Consts.PREFS_SETTINGS_SUMMARY, 0)
                 
                 loading = false
         }

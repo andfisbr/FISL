@@ -247,6 +247,8 @@ class AgendaActivity: ParentActivity() {
         
         private fun searchInit(focus: Boolean = true) {
                 agenda_search_button.setImageResource(R.drawable.ic_close_black_24dp)
+                agenda_search_button.contentDescription = "Fechar caixa de pesquisa."
+                
 
                 agenda_search_container.show()
                 
@@ -264,6 +266,7 @@ class AgendaActivity: ParentActivity() {
                 agenda_search_container.hide()
 
                 agenda_search_button.setImageResource(R.drawable.ic_search_black_24dp)
+                agenda_search_button.contentDescription = "Pesquisar. Utilize a caixa a esquerda para a pesquisa."
                 
                 agenda_search.setText("")
         

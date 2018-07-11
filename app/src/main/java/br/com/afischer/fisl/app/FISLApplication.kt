@@ -18,6 +18,8 @@ class FISLApplication: MultiDexApplication() {
         lateinit var agenda: Agenda
         lateinit var alarm: Alarm
         lateinit var summary: Summary
+        var summaryHashCode: Int = 0
+        var about: String = ""
         
 
         lateinit var prefs: SharedPreferences
@@ -53,6 +55,7 @@ class FISLApplication: MultiDexApplication() {
 
                 alarm.items = settings.alarmItems
                 agenda.items.addAll(settings.agendaItems)
+                summaryHashCode = settings.agendaSummaryHashCode
         
 
 
@@ -69,6 +72,7 @@ class FISLApplication: MultiDexApplication() {
                         
                         alarm.items = settings.alarmItems
                         agenda.items.addAll(settings.agendaItems)
+                        summaryHashCode = settings.agendaSummaryHashCode
                 }
         }
 }

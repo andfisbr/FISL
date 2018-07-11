@@ -67,7 +67,7 @@ class AlarmNotificationService: IntentService("AlarmNotificationService") {
                 contentExpanded.setTextViewText(R.id.na_exp_room, alarm.room)
                 contentExpanded.setTextViewText(R.id.na_exp_title, alarm.title)
                 contentExpanded.setTextViewText(R.id.na_exp_owner, alarm.owner)
-                contentExpanded.setTextViewText(R.id.na_exp_track, alarm.track.split(" - ")[1])
+                contentExpanded.setTextViewText(R.id.na_exp_track, if (alarm.track.contains("-")) alarm.track.split(" - ")[1] else alarm.track)
         
                 
                 

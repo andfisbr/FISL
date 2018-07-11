@@ -58,31 +58,30 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         
         <string name="about" ><![CDATA[
 <h3>18 anos fortalecendo o conhecimento colaborativo e construindo tecnologias livres.</h3>
-<p>A cada ano o Fórum Internacional Software Livre vem se firmando como um local de discussão e exposição das principais novidades e inovações em tecnologias livres.</p>
-<p>Desde a primeira edição, o FISL tem como principal valor "a tecnologia que liberta", incentivando a manutenção da transparência na tecnologia, seja nos códigos, nos padrões abertos, no compartilhamento de conhecimento e na luta pela internet livre e neutra.</p>
-<p>Em 2018 o FISL será novamente o palco do maior encontro de comunidades de Software Livre do mundo. Juntos, iremos compartilhar conhecimentos e inovações, renovar conexões com as comunidades, participar do ecosistema das tecnologias livres e abertas, mas também inquietações em busca do nosso objetivo comum: construir uma humanidade mais justa, colaborativa e com conhecimento livre.</p>
+<p>A cada ano, o Fórum Internacional de software livre tem se estabelecido como um lugar para discussão e exposição das principais inovações em tecnologias livres.</p>
+<p>Desde a primeira edição, FISL tem como o principal valor "a tecnologia que liberta", incentivando a manutenção da transparência na tecnologia, seja em códigos, padrões abertos, compartilhamento de conhecimento e da luta pela Internet livre e neutra.</p>
+<p>Em 2018 o fisl será novamente o palco da maior reunião de comunidades de software livre no mundo. Juntos, vamos compartilhar conhecimentos e inovações, renovar conexões com as comunidades, participar do sistema de tecnologias livres e abertas, mas também preocupações em busca de nosso objetivo comum: construir uma humanidade mais justa, colaborativa e com conhecimento livre.</p>
 <br>
 <br>
-<h3>Porque ir</h3>
-<p>O software livre está presente nos negócios, no comércio eletrônico, na educação, na Web, nos dispositivos móveis, na infraestrututa de TI e em tantos outros aspectos da vida moderna.</p>
-<p>Assim sendo, é importante saber quais tecnologias se integram melhor umas com as outras, como os projetos de código aberto que você usa são desenvolvidos e suportados e por quem e entender sobre licenciamento. Nos quatro dias do FISL você encontra:</p>
-<p>
-<b>*</b> Técnicas para escrever o melhor código<br>
-<b>*</b> Vantagens de usar softwares que você pode ter acesso ao código e modificar, se necessário<br>
-<b>*</b> Como participar de uma comunidade<br>
-<b>*</b> Como migrar de instalações comerciais caras para soluções de código aberto mais eficientes e econômicas<br>
-<b>*</b> Inovações na administração de sistemas e em redes que sua organização pode começar a usar imediatamente para aumentar a eficiência<br>
-<b>*</b> Conhecimento para garantir que seu código seja realmente seguro<br>
-<b>*</b> Técnicas fundamentais e dicas avançadas para dimensionar e otimizar seus sistemas com economia de tempo<br>
-<b>*</b> Técnicas para aumentar a produtividade e reduzir o custo de implantação, desde bancos de dados até computação em nuvem<br>
-<b>*</b> Projetos, serviços, linguagens e ferramentas promissores<br>
-<b>*</b> Temas atualizados, como Big Data, Internet das Coisas, Cloud Computing, Inteligência Artificial, Robótica, entre outros.
-</p>
+<h3>Por que ir</h3>
+<p>Software livre está presente em negócios, ecommerce, educação, a Web, dispositivos móveis, infraestrututa-lo e em tantos outros aspectos da vida moderna.</p>
+<p>Portanto, é importante saber quais tecnologias se integram melhor umas com as outras, já que os projetos de código aberto que você usa são desenvolvidos e suportados e por quem e entender sobre licenciamento. Nos quatro dias do FISL você encontra:</p>
+<br>*</br> Técnicas para escrever o melhor código</li>
+<br>*</br> Vantagens do uso de software você pode ter acesso ao código e modificar se necessário</li>
+<br>*</br> Como aderir a uma comunidade</li>
+<br>*</br> Como migrar de instalações comerciais dispendiosas para soluções de código aberto mais eficientes e rentáveis</li>
+<br>*</br> Inovações na administração do sistema e redes que sua organização pode começar a usar imediatamente para aumentar a eficiência</li>
+<br>*</br> Conhecimento para garantir que seu código é realmente seguro</li>
+<br>*</br> Técnicas fundamentais e dicas avançadas para dimensionar e otimizar seus sistemas de economia de tempo</li>
+<br>*</br> técnicas para aumentar a produtividade e reduzir o custo de implantação, a partir de bases de dados para computação em nuvem</li>
+<br>*</br> Projectos promissores, serviços, línguas e ferramentas</li>
+<br>*</br> Tópicos atualizados como Big Data, internet das coisas, computação em nuvem, inteligência artificial, robótica, entre outros.</li>
 <br>
 <br>
+
 <h3>Quem faz o FISL</h3>
 <p>
-COORDENAÇÃO<br>
+COORDENAÇÃO GERAL<br>
 <b>*</b> Coordenadores: Sady Jacques, Ricardo Fritsch e Clarisse Abrahão<br>
 <b>*</b> Secretaria Executiva: Luiz Vicente Basso<br>
 <b>*</b> Secretária: Aline Peres<br>
@@ -93,6 +92,10 @@ GRUPOS DE TRABALHO<br>
 <b>*</b> Coord. GT Temário: Daniel Muller<br>
 <b>*</b> Coord. GT Web: Alexandre Thomé<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Conteúdos: Aline Peres<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvimento WebSite atual: Luciano Lourenço Maddrum e Fabrício Reis<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvimento WebSite anterior: Clovis Euzebio Schimitz Beccon Junior e Thiago Paixão<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Web Designer: Luciano Lourenço Maddrum<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvedor APP da agenda: André Fischer<br>
 <b>*</b> Coord. GT Páginas Amigas: Oscar Luz<br>
 <b>*</b> Coord. GT Fislinho: Carlos Castro<br>
 <b>*</b> Coord. GT Acessibilidade: José Francisco<br>
@@ -131,6 +134,11 @@ E-mail: fisl ARROBA luizbasso PONTO com PONTO br<br>
 Espaço de Projetos<br>
 Fone: (51) 3029-9398<br>
 E-mail: fisl ARROBA espacodeprojetos PONTO com PONTO br<br>
+<br>
+<br>
+<strong>Designer</strong><br>
+Luciano Lourenço Maddrum<br>
+E-mail: maddrum ARROBA gmail PONTO com<br>
 <br>
 <br>
 <strong>Infra-estrutura e TV Software Livre</strong><br>

@@ -114,7 +114,7 @@ class TabFragment: ParentFragment() {
         private fun detailListener(i: Item) {
                 EventBus.getDefault().post(AgendaActivity_ProgressShow("Aguarde"))
                 doAsync {
-                        val result = app.agenda.retrieveTalk(i.talk?.id)
+                        val result = app.agenda.retrieveTalk(i.talk!!.id)
                         
                         
                         uiThread {

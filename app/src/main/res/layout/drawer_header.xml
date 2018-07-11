@@ -4,6 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:background="@drawable/ic_drawer_background"
+        android:contentDescription="@null"
         >
         
         <ImageView
@@ -13,6 +14,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginStart="50dp"
                 android:src="@drawable/ic_launcher_144"
+                android:contentDescription="@null"
                 />
 </RelativeLayout >
 

@@ -13,11 +13,7 @@ import br.com.afischer.fisl.models.Keyword
 import kotlinx.android.synthetic.main.searcher_view.view.*
 
 
-class SearcherAdapter(
-        context: Context,
-        private val itemLayout: Int,
-        private var dataList: MutableList<Keyword>?
-): ArrayAdapter<Keyword>(context, itemLayout, dataList) {
+class SearcherAdapter(context: Context, private val itemLayout: Int, private var dataList: MutableList<Keyword>?): ArrayAdapter<Keyword>(context, itemLayout, dataList) {
         
         
         private val listFilter = ListFilter()
