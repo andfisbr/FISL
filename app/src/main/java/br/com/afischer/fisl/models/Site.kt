@@ -23,8 +23,8 @@ class Site {
 
                 
                 client = OkHttpClient.Builder()
-                        .readTimeout(45, TimeUnit.SECONDS)
-                        .connectTimeout(45, TimeUnit.SECONDS)
+                        .readTimeout(60, TimeUnit.SECONDS)
+                        .connectTimeout(60, TimeUnit.SECONDS)
                         .cookieJar(JavaNetCookieJar(cookieManager))
                         .build()
         }
