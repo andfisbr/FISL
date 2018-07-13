@@ -103,7 +103,7 @@ class AlarmsAdapter(var activity: Activity, private var list: MutableList<AlarmB
                         alarmrow_title.text = item.title
                         alarmrow_room.text = item.room
                         alarmrow_owner.text = item.owner
-                        alarmrow_track.text = item.track.split(" - ")[1]
+                        alarmrow_track.text = if (item.track.contains("-")) item.track.split(" - ")[1] else item.track
                         
 
                         alarmrow_del.setOnClickListener {

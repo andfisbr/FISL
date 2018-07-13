@@ -40,6 +40,7 @@ class SearcherAdapter(context: Context, private val itemLayout: Int, private var
                         "palestrante" -> v.sv_container.setBackgroundResource(R.color.green_50)
                         "título" -> v.sv_container.setBackgroundResource(R.color.blue_50)
                         "trilha" -> v.sv_container.setBackgroundResource(R.color.red_50)
+                        "sala" -> v.sv_container.setBackgroundResource(R.color.orange_50)
                 }
                 
                 

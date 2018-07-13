@@ -35,7 +35,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="André Fischer"
+                android:contentDescription="@string/description_dev"
                 />
 
 
@@ -60,7 +60,7 @@
                         android:padding="12dp"
                         android:src="@drawable/ic_arrow_back_black_24dp"
                         android:tint="@color/colorPrimary"
-                        android:contentDescription="Voltar"
+                        android:contentDescription="@string/description_back"
                         />
         </RelativeLayout >
         
@@ -110,7 +110,7 @@
                                 android:layout_marginTop="32dp"
                                 android:paddingLeft="16dp"
                                 android:paddingRight="16dp"
-                                android:text="social"
+                                android:text="@string/label_social"
                                 android:textSize="20sp"
                                 />
         

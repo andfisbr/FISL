@@ -22,7 +22,7 @@ class RoomsAdapter(
         var activity: Activity,
         private var list: MutableList<Item>,
         var listener: (i: Item) -> Unit,
-        var filterListener: (s: String, t: String) -> Unit,
+        var filterListener: (s: String) -> Unit,
         var alarmListener: (i: Item, s: String) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         
@@ -98,28 +98,32 @@ class RoomsAdapter(
                         roomrow_notifyme.hide()
                         roomrow_recordings_list.hide()
                         roomrow_recordings_warning.hide(false)
-                        roomrow_container.setBackgroundResource(R.color.white)
                         roomrow_container.setOnClickListener {}
         
                         
-                        roomrow_room.text = item.roomName.replace(" ", "\n")
+                        roomrow_room.text = item.roomName //.replace(" ", "\n")
+                        roomrow_room.contentDescription = "Clique-me para filtrar pela sala ${item.roomName.toLowerCase().replace("sala ", "")}"
+                        roomrow_room.setOnClickListener { filterListener(item.roomName) }
+
+
                         roomrow_duration.text = "${item.duration}min"
-                        
-
-
-                        if (item.status == "empty") {
-                                roomrow_title.text = "Sem palestra"
-                                roomrow_title.contentDescription = "Sem palestra"
-                                roomrow_container.setBackgroundResource(R.color.blue_50)
-                                return@with
-                        
-                        } else if (item.status == "dirty") {
-                                roomrow_container.setBackgroundResource(R.color.red_50)
+        
+        
+        
+                        when {
+                                item.status == "empty" -> {
+                                        roomrow_title.text = "Sem palestra"
+                                        roomrow_title.contentDescription = "Sem palestra"
+                                        roomrow_container.setBackgroundResource(R.color.blue_50)
+                                        return@with
+        
+                                }
+                                item.status == "dirty" -> roomrow_container.setBackgroundResource(R.color.red_50)
+                                else -> roomrow_container.setBackgroundResource(R.color.white)
                         }
         
         
-        
-
+                        
 
 
                         /**
@@ -129,7 +133,20 @@ class RoomsAdapter(
                         if (item.recordings.isNotEmpty()) {
                                 roomrow_recordings_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                                 roomrow_recordings_list.setHasFixedSize(true)
-                                val adapter = RecordingsAdapter(activity, item.recordings) { s -> activity.browse(s) }
+                                val adapter = RecordingsAdapter(activity, item.recordings) { s ->
+                                        //if (!NetworkUtils.isWifiConnected()) {
+                                        //        activity.alert {
+                                        //                isCancelable = false
+                                        //                message = "Você não está conectado através de um WiFi. Dependendo do vídeo, o download pode consumir muito de sua banda 3/4G.\n\nContinuar download através da rede atual?"
+                                        //
+                                        //                positiveButton("Sim") { activity.browse(s) }
+                                        //                negativeButton("Não") { it.dismiss() }
+                                        //        }.show()
+                                        //
+                                        //} else {
+                                                activity.browse(s)
+                                        //}
+                                }
                                 roomrow_recordings_list.adapter = adapter
                 
                         } else {
@@ -138,6 +155,8 @@ class RoomsAdapter(
                         }
         
         
+
+
                         
         
         
@@ -145,29 +164,97 @@ class RoomsAdapter(
                                 roomrow_owner.show()
                                 roomrow_track.show()
                                 roomrow_notifyme.show()
+
+                                roomrow_title.alpha = 1.0f
+                                roomrow_owner.alpha = 1.0f
+                                roomrow_track.alpha = 1.0f
+        
+        
+                                val track = if (t.track.contains("-")) t.track.split(" - ")[1] else t.track
+        
+                                roomrow_title.text = t.title
+                                roomrow_owner.text = t.owner
+                                roomrow_track.text = track
+
+                                roomrow_owner.contentDescription = "Clique-me para filtrar pelo palestrante ${t.owner}"
+                                roomrow_track.contentDescription = "Clique-me para filtrar pela trilha $track"
+        
+                                roomrow_container.setOnClickListener { listener(item) }
+                                roomrow_owner.setOnClickListener { filterListener(t.owner) }
+                                roomrow_track.setOnClickListener { filterListener(track) }
+        
+        
+
+                                
+        
+                                //
+                                // informações para acessibilidade
+                                //
+                                val recordings = when {
+                                        item.recordings.isEmpty() -> "sem gravações"
+                                        item.recordings.size == 1 -> "uma gravação"
+                                        else -> "${item.recordings.size} gravações"
+                                }
+                                roomrow_container.contentDescription = """
+                                        sala: ${item.roomName.toLowerCase().replace("sala ", "")}
+                                        duração: ${item.duration}min
+                                        título: ${t.title.toLowerCase()}
+                                        palestrante: ${t.owner.toLowerCase()}
+                                        trilha: $track
+                                        $recordings
+                                """
+
                                 
                                 
-                                val date = item.begins.asDate("yyyy-MM-ddTHH:mm:ss").time
+                                
+                                
+                                //
+                                // muda a cor do fundo baseado no status da palestra
+                                //
+                                if (t.status != "confirmed") {
+                                        roomrow_container.setBackgroundResource(R.color.red_50)
+                                }
+        
+        
+        
+                                //
+                                // muda a cor do fundo quando for continuação
+                                //
+                                if (item.continuation) {
+                                        roomrow_notifyme.hide()
+                                        roomrow_duration.hide()
+                                        roomrow_recordings_list.hide()
+                                        roomrow_recordings_warning.hide()
+        
+                                        roomrow_title.alpha = 0.5f
+                                        roomrow_owner.alpha = 0.5f
+                                        roomrow_track.alpha = 0.5f
+                                        
+                                        roomrow_title.text = "CONTINUAÇÃO .:\n${t.title}"
+                                        roomrow_container.setBackgroundResource(R.color.green_50)
+        
+                                        roomrow_container.contentDescription = "Continuação da palestra ${t.title.toLowerCase()}"
+                                }
+        
+        
+        
+        
+        
+                                //
+                                // não mostra mais o botão para adicionar notificação se já passou do horário da palestra
+                                //
+                                val date = item.begins.replace("T", " ").asDate("yyyy-MM-dd HH:mm:ss").time
                                 if (date < Dates.today.time) {
                                         roomrow_notifyme.hide()
                                 }
+        
+        
+        
                                 
-                                
 
-                                roomrow_title.text = t.title
-
-                                roomrow_owner.text = t.owner
-                                roomrow_owner.contentDescription = "Clique-me para filtrar a agenda pelo palestrante ${t.owner}"
-
-                                roomrow_track.text = t.track.split(" - ")[1]
-                                roomrow_track.contentDescription = "Clique-me para filtrar a agenda pela trilha ${t.track.split(" - ")[1]}"
                                 
                 
                                 
-                                roomrow_container.setOnClickListener { listener(item) }
-                                roomrow_owner.setOnClickListener { filterListener(t.owner, "owner") }
-                                roomrow_track.setOnClickListener { filterListener(t.track, "track") }
-        
         
                                 
                                 
@@ -175,9 +262,9 @@ class RoomsAdapter(
         
         
         
-                                /**
-                                 * altera o ícone conforme o item tenha ou não alarm
-                                 */
+                                //
+                                // altera o ícone conforme o item tenha ou não alarm
+                                //
                                 roomrow_notifyme.setImageResource(R.drawable.ic_notification_outline_black_24dp)
                                 roomrow_notifyme.tag = "o"
                                 if (app.alarm.contains(item.id)) {

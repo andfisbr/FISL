@@ -22,7 +22,7 @@
                 />
         
         <ImageView
-                android:id="@+id/alarmi_logo"
+                android:id="@+id/alarm_logo"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:src="@drawable/ic_logo_piece"
@@ -61,7 +61,7 @@
                         android:padding="12dp"
                         android:src="@drawable/ic_arrow_back_black_24dp"
                         android:tint="@color/colorPrimary"
-                        android:contentDescription="Voltar"
+                        android:contentDescription="@string/description_back"
                         />
                 
                 <TextView
@@ -74,7 +74,7 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="NOTIFICAÇÕES"
+                        android:text="@string/label_notifications"
                         android:textSize="18sp"
                         />
         

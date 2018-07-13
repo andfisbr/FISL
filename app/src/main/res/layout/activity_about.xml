@@ -66,7 +66,7 @@
                         android:padding="12dp"
                         android:src="@drawable/ic_arrow_back_black_24dp"
                         android:tint="@color/colorPrimary"
-                        android:contentDescription="Voltar"
+                        android:contentDescription="@string/description_back"
                         />
                 
                 <TextView
@@ -76,7 +76,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/about_back_button"
                         android:layout_toRightOf="@id/about_back_button"
-                        android:text="SOBRE"
+                        android:text="@string/label_about"
                         android:textSize="18sp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"

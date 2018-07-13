@@ -4,6 +4,7 @@ import android.os.Bundle
 import br.com.afischer.fisl.adapters.TextTagsAdapter
 import br.com.afischer.fisl.enums.ResultType
 import br.com.afischer.fisl.models.FISLResult
+import com.pawegio.kandroid.show
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
@@ -21,31 +22,25 @@ class SplashActivity: ParentActivity() {
         
         
         
-                
-                
-                
-                
+        
+        
+        
+        
                 splash_version.text = BuildConfig.VERSION_NAME
         
         
+                val tracks = mutableListOf("Administração de sistemas", "Computação em Nuvem, Névoa e P2P", "Desenvolvimento", "Hardware aberto e livre", "Tópicos Emergentes", "Software Livre no dia a dia", "Comunicação e Cultura", "Ecossistema", "Educação")
         
-                val tracks = mutableListOf(
-                        "Administração de sistemas",
-                        "Computação em Nuvem, Névoa e P2P",
-                        "Desenvolvimento",
-                        "Hardware aberto e livre",
-                        "Tópicos Emergentes",
-                        "Software Livre no dia a dia",
-                        "Comunicação e Cultura",
-                        "Ecossistema",
-                        "Educação"
-                )
-                
                 textTagsAdapter = TextTagsAdapter(tracks)
                 splash_tags.setAdapter(textTagsAdapter)
+        }
+        
+        
+        override fun onResume() {
+                super.onResume()
                 
-                
-                
+
+
                 //
                 // reprograma os alarmes
                 //
@@ -64,7 +59,7 @@ class SplashActivity: ParentActivity() {
                         //
                         // atualiza o sobre
                         //
-                        app.agenda.retrieveAbout()
+                        //app.agenda.retrieveAbout()
 
 
 
@@ -76,6 +71,8 @@ class SplashActivity: ParentActivity() {
                         if (app.agenda.summary!!.hashCode() != app.summaryHashCode) {
                                 app.summaryHashCode = app.agenda.summary!!.hashCode()
                                 app.settings.agendaSummaryHashCode = app.summaryHashCode
+                                
+                                runOnUiThread { splash_dots.show() }
         
                                 result = app.agenda.retrieve()
                         }

@@ -17,6 +17,7 @@ data class Item(
 ) {
         var alarmID: Int = -1
         var keywords: MutableList<String> = mutableListOf()
+        var continuation: Boolean = false
         
         
         

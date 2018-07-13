@@ -9,12 +9,12 @@ import br.com.afischer.fisl.events.AgendaActivity_OnAgendaFilter
 import br.com.afischer.fisl.events.AgendaActivity_ProgressHide
 import br.com.afischer.fisl.events.AgendaActivity_ProgressShow
 import br.com.afischer.fisl.events.AgendaActivity_ShowToast
-import br.com.afischer.fisl.extensions.asColor
-import br.com.afischer.fisl.extensions.hideKeyboard
-import br.com.afischer.fisl.extensions.showKeyboard
+import br.com.afischer.fisl.extensions.*
 import br.com.afischer.fisl.models.Keyword
 import com.pawegio.kandroid.hide
 import com.pawegio.kandroid.show
+import khronos.Dates
+import khronos.with
 import kotlinx.android.synthetic.main.activity_agenda.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -97,6 +97,8 @@ class AgendaActivity: ParentActivity() {
         
         private fun initListeners() {
                 setResult(1000)
+                
+                
                 agenda_back_button.setOnClickListener {
                         finish()
                 }
@@ -126,6 +128,14 @@ class AgendaActivity: ParentActivity() {
                                 app.agenda.day = b.text.toString()
                                 onDayButtonClick()
                         }
+                }
+                
+                
+                
+                agenda_show_without_talks.setOnClickListener {
+                        agenda_show_without_talks.isChecked = !agenda_show_without_talks.isChecked
+                        
+                        agendaUpdate()
                 }
         }
 
@@ -164,7 +174,15 @@ class AgendaActivity: ParentActivity() {
                 }
                 pagerAdapter?.notifyDataSetChanged()
                 
-                agenda_pager.currentItem = 0
+                
+                
+                
+                //
+                // pula para página correta conforme a hora atual
+                //
+                agenda_pager.currentItem = getCurrentPage()
+                
+                
                 
                 
                 
@@ -172,7 +190,7 @@ class AgendaActivity: ParentActivity() {
         }
         
         
-
+        
         private fun initAutocompleteSearcher() {
                 val searcherAdapter = SearcherAdapter(this, R.layout.searcher_view, app.agenda.keywords.sortedBy { it.text }.toMutableList())
                 agenda_search.setAdapter(searcherAdapter)
@@ -219,14 +237,18 @@ class AgendaActivity: ParentActivity() {
                 // - mapeia os dias
                 // - mostra botões conforme os dias mapeados
                 //
-                app.agenda.items.filter {
+                val aux = app.agenda.items.filter {
                         if (app.agenda.filter.isNotEmpty()) it.keywords.contains(app.agenda.filter) else true
 
                 }.map {
                         it.begins.slice(8..9)
 
-                }.toMutableList().forEach {
-                        buttons.forEach { b -> if (b.text == it) b.show() }
+                }.toMutableList()
+                
+                buttons.forEach {
+                        if (it.text in aux) {
+                                it.show()
+                        }
                 }
         
         
@@ -234,16 +256,25 @@ class AgendaActivity: ParentActivity() {
                 //
                 // acerta o dia do filtro
                 //
-                app.agenda.day = "11"
-                if (buttons.any { it.isShown }) {
-                        app.agenda.day = (buttons.first { it.isShown }).text.toString()
+                app.agenda.day = getCurrentDay()
+                
+                
+                
+                
+                //
+                // se o botão referente ao dia estiver sendo mostrado
+                // então deixar ele selecionado
+                // senão, vai para o primeiro dia do evento
+                //
+                if (app.agenda.day !in aux) {
+                        app.agenda.day = "11"
                 }
 
                 
                 
+                
                 initButtons()
         }
-        
         
         private fun searchInit(focus: Boolean = true) {
                 agenda_search_button.setImageResource(R.drawable.ic_close_black_24dp)
@@ -273,7 +304,7 @@ class AgendaActivity: ParentActivity() {
 
 
                 app.agenda.filter = ""
-                app.agenda.day = "11"
+                app.agenda.day = getCurrentDay()
         
         
                 buttons.forEach { it.show() }
@@ -326,17 +357,9 @@ class AgendaActivity: ParentActivity() {
         
         private fun agendaUpdate() {
                 //
-                // obtém as trilhas da agenda antes do filtro
-                //
-                app.agenda.doTracks()
-        
-        
-
-                
-                //
                 // filtra pela trilha escolhida
                 //
-                app.agenda.doFilter()
+                app.agenda.doFilter(agenda_show_without_talks.isChecked)
         
         
                 
@@ -353,7 +376,39 @@ class AgendaActivity: ParentActivity() {
                 progressHide()
         }
         
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        private fun getCurrentDay(): String {
+                val startDate = Dates.today.with(2018, 7, 11, 0, 0, 1)
+                val endDate = Dates.today.with(2018, 7, 14, 23, 59, 59)
+                
+                return if (Dates.today in startDate..endDate) {
+                        Dates.today.day().toString().pad("<00")
+                } else {
+                        "11"
+                }
+        }
+        
+        
+        private fun getCurrentPage(): Int {
+                val hour = Dates.today.hour().pad("<00")
+                var position = 0
+                
+                pagerAdapter?.fragmentTitleList?.forEachIndexed { index, s ->
+                        if (s.startsWith(hour) && position == 0) {
+                                position = index
+                        }
+                }
+                
+                return position
+        }
         
         
         

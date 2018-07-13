@@ -11,8 +11,8 @@ android {
                 applicationId "br.com.afischer.fisl"
                 minSdkVersion 16
                 targetSdkVersion 27
-                versionCode 112
-                versionName "1.1.2"
+                versionCode 116
+                versionName "1.1.6"
                 
                 multiDexEnabled true
         }

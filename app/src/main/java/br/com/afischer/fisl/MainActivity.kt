@@ -82,7 +82,7 @@ class MainActivity: ParentActivity() {
                 main_about2.hide()
 
 
-                if (app.about.isNotEmpty()) {
+                if (false /*app.about.isNotEmpty()*/) {
                         val content = """
                         <?xml version="1.0" encoding="UTF-8" ?>
                         <html>
@@ -93,7 +93,7 @@ class MainActivity: ParentActivity() {
                                         body {
                                                 font-family: 'Roboto Condensed', sans-serif;
                                                 font-size: 20px;
-                                                color: #708792;
+                                                color: #445a64;
                                         }
                                         .margem {
                                                 padding-top: 1em;
@@ -202,11 +202,12 @@ class MainActivity: ParentActivity() {
                         Sponsor("senac rs", R.drawable.ic_sponsor_senacrs, "http://www.senacrs.com.br/"),
                         Sponsor("sucesu rs", R.drawable.ic_sponsor_sucesurs, "http://www.sucesurs.org.br/"),
                         Sponsor("linux magazine", R.drawable.ic_sponsor_linuxmagazine, "http://www.linux-magazine.com/"),
-                        Sponsor("i-educar", R.drawable.ic_sponsor_ieducar, "https://portal.softwarepublico.gov.br/social/i-educar/"),
+                        Sponsor("i-educar", R.drawable.ic_sponsor_ieducar, "https://twitter.com/ieducar/"),
                         Sponsor("linux professional institute", R.drawable.ic_sponsor_lpi, "http://pucrs.br/"),
                         Sponsor("optdyn", R.drawable.ic_sponsor_optdyn, "https://optdyn.com/"),
                         Sponsor("tecnopuc rs", R.drawable.ic_sponsor_tecnopucrs, "http://pucrs.br/tecnopuc/"),
                         Sponsor("madson books", R.drawable.ic_sponsor_madsonbooks, "http://madsonbooks.com.br/"),
+                        Sponsor("procempa", R.drawable.ic_sponsor_procempa, "http://www.procempa.com.br/"),
                         Sponsor("puc rs", R.drawable.ic_sponsor_pucrs, "http://pucrs.br/"),
                         Sponsor("rede nacional de ensino e pesquisa", R.drawable.ic_sponsor_rnp, "https://www.rnp.br/"),
                         Sponsor("ministério da ciência, tecnologia, inovação e comunicação", R.drawable.ic_sponsor_mctic, "http://www.mctic.gov.br/portal/"),

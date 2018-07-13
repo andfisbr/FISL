@@ -161,4 +161,47 @@ E-mail: comercial ARROBA solis PONTO coop PONTO br<br>
 <p>Já possui alguns aplicativos publicados que facilitam muito o dia a dia de quem os usa - destaque para o GrünenKarte e o JáPassou?.</p>
 ]]>
         </string>
+        
+        
+        
+        
+        <string name="description_back" >Voltar</string >
+        <string name="description_search_autocomplete" >Digite uma trilha, título, palestrante ou sala.</string >
+        <string name="description_search" >Procurar. Utilize a caixa a esquerda para a procura.</string >
+        <string name="description_notifications" >Notificações sobre as palestras.</string >
+        <string name="description_dia11" >Dia 11</string >
+        <string name="description_dia12" >Dia 12</string >
+        <string name="description_dia13" >Dia 13</string >
+        <string name="description_dia14" >Dia 14</string >
+        <string name="description_dev" >André Fischer</string >
+        <string name="description_menu" >Menu</string >
+        <string name="description_sponsors" >Patrocinadores</string >
+        <string name="description_agenda" >Agenda do evento</string >
+        <string name="description_notification_delete" >Excluir notificação</string >
+        <string name="description_notification_add" >Adicionar notificação</string >
+        <string name="description_filterby_owner" >Clique-me para filtrar pelo palestrante</string >
+        <string name="description_filterby_track" >Clique-me para filtrar pela trilha</string >
+
+        <string name="label_agenda" >AGENDA</string >
+        <string name="label_search_autocomplete" >trilha, título, palestrante ou sala</string >
+        <string name="label_rooms_without_talks" >mostrar salas sem palestras</string >
+        <string name="label_11" >11</string >
+        <string name="label_12" >12</string >
+        <string name="label_13" >13</string >
+        <string name="label_14" >14</string >
+        <string name="label_about" >SOBRE</string >
+        <string name="label_dots" >…</string >
+        <string name="label_version" >1.0.0</string >
+        <string name="label_notifications" >NOTIFICAÇÕES</string >
+        <string name="label_social" >social</string >
+        <string name="label_fisl" >FISL</string >
+        <string name="label_year" >18</string >
+        <string name="label_forum" >18º Fórum Internacional</string >
+        <string name="label_software_livre" >SOFTWARE LIVRE</string >
+        <string name="label_slogan" >A tecnologia que liberta</string >
+        <string name="label_track" >Trilha</string >
+        <string name="label_owners" >Autor(es)</string >
+        <string name="label_when" >Apresentação</string >
+        <string name="label_description" >Descrição</string >
+        <string name="label_no_recordings" >sem gravações</string >
 </resources >

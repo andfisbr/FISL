@@ -41,7 +41,7 @@ class Agenda (var app: FISLApplication) {
                 items.clear()
                 
                 
-                val rooms = 1..10
+                val rooms = 1..11
                 var days = 11..14
                 
                 
@@ -67,8 +67,24 @@ class Agenda (var app: FISLApplication) {
                                         }
                                         
                                         val d: Day = Gson().fromJson(result)
-                                        d.items.forEach {
-                                                items.add(it)
+                                        d.items.forEach { item ->
+                                                items.add(item)
+
+                                                
+                                                //
+                                                // solução de contorno para fazer com que palestras com mais de uma hora apareçam nos outros horários
+                                                //
+                                                val slots = (Math.ceil(item.duration / 60.0)).toInt()
+                                                if (slots > 1) {
+                                                        (1 until slots).forEach {
+                                                                val aux = item.copy()
+                                                                aux.continuation = true
+                                                                aux.hour = aux.hour + it
+                                                                aux.begins = "${aux.begins.split("T")[0]}T${aux.hour.pad("<00")}:00:00"
+
+                                                                items.add(aux)
+                                                        }
+                                                }
                                         }
                                 }
                         }
@@ -130,15 +146,18 @@ class Agenda (var app: FISLApplication) {
                         val title = a.talk?.title!!.toLowerCase()
                         val owner = a.talk?.owner!!.toLowerCase()
                         val track = a.talk?.track!!.toLowerCase().split(" - ")[1]
+                        val room = a.roomName.toLowerCase()
                         if (items[i].keywords.none { it == title }) { items[i].keywords.add(title) }
                         if (items[i].keywords.none { it == owner }) { items[i].keywords.add(owner) }
                         if (items[i].keywords.none { it == track }) { items[i].keywords.add(track) }
+                        if (items[i].keywords.none { it == room }) { items[i].keywords.add(room) }
                         
                         
                         
                         if (keywords.none { it.text == title }) { keywords.add(Keyword(title, "título")) }
                         if (keywords.none { it.text == owner }) { keywords.add(Keyword(owner, "palestrante")) }
                         if (keywords.none { it.text == track }) { keywords.add(Keyword(track, "trilha")) }
+                        if (keywords.none { it.text == room }) { keywords.add(Keyword(room, "sala")) }
                 }
         }
         
@@ -148,12 +167,14 @@ class Agenda (var app: FISLApplication) {
         
         
         
-        fun doFilter() {
+        fun doFilter(withEmpty: Boolean = false) {
                 aux.clear()
                 
                 
                 aux.addAll(
                         items.filter {
+                                if (!withEmpty) it.status != "empty" else true
+                        }.filter {
                                 it.begins.startsWith(date)
                         }.filter {
                                 if (filter.isNotEmpty()) it.keywords.contains(filter) else true
@@ -167,22 +188,6 @@ class Agenda (var app: FISLApplication) {
         
         
         
-        fun doTracks() {
-                tracks.clear()
-                
-                
-                items.filter {
-                        it.begins.startsWith(date)
-                }.filter {
-                        if (filter.isNotEmpty()) it.keywords.contains(filter) else true
-                }.forEach {
-                        it.talk?.let { talk ->
-                                if (!tracks.contains(talk.track)) {
-                                        tracks.add(talk.track)
-                                }
-                        }
-                }
-        }
         
         
         

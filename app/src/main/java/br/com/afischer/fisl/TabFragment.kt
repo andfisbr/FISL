@@ -92,7 +92,7 @@ class TabFragment: ParentFragment() {
                         activity = this.activity!!,
                         list = rows,
                         listener = { i -> detailListener(i) },
-                        filterListener = { s, t -> filterListener(s, t) },
+                        filterListener = { s -> filterListener(s) },
                         alarmListener = { i, s -> alarmListener(i, s) }
                 )
                 rooms_list.adapter = adapter
@@ -100,11 +100,8 @@ class TabFragment: ParentFragment() {
         
         
         
-        private fun filterListener(param: String, type: String) {
-                app.agenda.filter = when (type) {
-                        "track" -> param.toLowerCase().split(" - ")[1]
-                        else -> param.toLowerCase()
-                }
+        private fun filterListener(param: String) {
+                app.agenda.filter = param.toLowerCase()
         
         
                 EventBus.getDefault().post(AgendaActivity_OnAgendaFilter(app.agenda.filter))
@@ -149,9 +146,21 @@ class TabFragment: ParentFragment() {
                         if (app.agenda.talk.resource.coauthors.isNotEmpty()) v.dsd_coauthor.show()
 
 
-                        v.dsd_local.text = "Dia <strong>${app.agenda.talk.resource.slots[0].begins.split("T")[0].split("-")[2]}</strong> às <strong>${app.agenda.talk.resource.slots[0].hour}h</strong> na sala <strong>${app.agenda.talk.resource.slots[0].roomName}</strong> (${app.agenda.talk.resource.slots[0].duration}min)".asHtml()
+
+
+                        val day = app.agenda.talk.resource.slots[0].begins.split("T")[0].split("-")[2]
+                        val hour = app.agenda.talk.resource.slots[0].hour
+                        val minute = app.agenda.talk.resource.slots[0].begins.split("T")[1].split(":")[1]
+                        val at = if (minute == "00") {
+                                "${hour}h"
+                        } else {
+                                "${hour}h${minute}min"
+                        }
+                        v.dsd_local.text = "Dia <strong>$day</strong> às <strong>$at</strong> na sala <strong>${app.agenda.talk.resource.slots[0].roomName}</strong> (${app.agenda.talk.resource.slots[0].duration}min)".asHtml()
                         v.dsd_description?.text = app.agenda.talk.resource.full.asHtml()
         
+                        
+                        
                         
                         activity!!.alert {
                                 customView = v

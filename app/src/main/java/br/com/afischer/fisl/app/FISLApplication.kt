@@ -72,7 +72,7 @@ class FISLApplication: MultiDexApplication() {
                         
                         alarm.items = settings.alarmItems
                         agenda.items.addAll(settings.agendaItems)
-                        summaryHashCode = settings.agendaSummaryHashCode
+                        summaryHashCode = 0
                 }
         }
 }

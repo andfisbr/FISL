@@ -14,22 +14,22 @@
                 android:id="@+id/agenda_banner"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:contentDescription="@null"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_banner_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@null"
                 />
         
         <ImageView
                 android:id="@+id/agenda_logo"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
+                android:contentDescription="@null"
                 android:src="@drawable/ic_logo_piece"
                 app:layout_constraintBottom_toBottomOf="@+id/agenda_banner"
                 app:layout_constraintRight_toRightOf="parent"
-                android:contentDescription="@null"
                 />
         
         <View
@@ -58,24 +58,25 @@
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:contentDescription="@string/description_back"
                         android:focusable="true"
                         android:padding="12dp"
                         android:src="@drawable/ic_arrow_back_black_24dp"
                         android:tint="@color/colorPrimary"
-                        android:contentDescription="Voltar"
                         />
                 
                 <TextView
                         android:id="@+id/agenda_toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/agenda_back_button"
                         android:layout_centerVertical="true"
-                        android:text="AGENDA"
-                        android:textSize="18sp"
+                        android:layout_toEndOf="@id/agenda_back_button"
+                        android:layout_toRightOf="@id/agenda_back_button"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
                         android:focusable="true"
+                        android:text="@string/label_agenda"
+                        android:textSize="18sp"
                         />
                 
                 <android.support.v7.widget.CardView
@@ -99,13 +100,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
+                                android:contentDescription="@string/description_search_autocomplete"
                                 android:dropDownHeight="280dp"
                                 android:fontFamily="sans-serif-condensed"
-                                android:hint="trilha, título ou palestrante"
+                                android:hint="@string/label_search_autocomplete"
                                 android:paddingLeft="8dp"
                                 android:paddingRight="8dp"
                                 android:singleLine="true"
-                                android:contentDescription="Digite uma trilha, título ou palestrante."
                                 />
                 </android.support.v7.widget.CardView >
                 
@@ -114,15 +115,15 @@
                         android:layout_width="48dp"
                         android:layout_height="match_parent"
                         android:layout_toLeftOf="@id/agenda_alarm_button"
+                        android:layout_toStartOf="@id/agenda_alarm_button"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:contentDescription="@string/description_search"
                         android:focusable="true"
                         android:padding="12dp"
                         android:src="@drawable/ic_search_black_24dp"
-                        android:layout_toStartOf="@id/agenda_alarm_button"
-                        android:contentDescription="Procurar. Utilize a caixa a esquerda para a procura."
                         />
-        
+                
                 <ImageView
                         android:id="@+id/agenda_alarm_button"
                         android:layout_width="48dp"
@@ -131,23 +132,38 @@
                         android:layout_alignParentRight="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:contentDescription="@string/description_notifications"
                         android:focusable="true"
                         android:padding="12dp"
                         android:src="@drawable/ic_notification_outline_black_24dp"
-                        android:contentDescription="Notificações sobre as palestras."
                         />
         </RelativeLayout >
         
         
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
                 android:id="@+id/agenda_buttons_container"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:gravity="center_vertical|end"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/agenda_tabs"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
+                
+                <CheckedTextView
+                        android:id="@+id/agenda_show_without_talks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+                        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/label_rooms_without_talks"
+                        android:textSize="10sp"
+                        />
+                
                 
                 <TextView
                         android:id="@+id/agenda_day11"
@@ -155,15 +171,18 @@
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/agenda_day12"
+                        android:layout_toStartOf="@id/agenda_day12"
                         android:background="@drawable/ic_circle_whitesmoke"
                         android:clickable="true"
+                        android:contentDescription="@string/description_dia11"
                         android:elevation="4dp"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center"
-                        android:text="11"
+                        android:text="@string/label_11"
                         android:textSize="18sp"
-                        android:contentDescription="Dia 11"
+                        app:layout_constraintRight_toLeftOf="@id/agenda_day12"
                         />
                 
                 <TextView
@@ -172,15 +191,18 @@
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/agenda_day13"
+                        android:layout_toStartOf="@id/agenda_day13"
                         android:background="@drawable/ic_circle_whitesmoke"
                         android:clickable="true"
+                        android:contentDescription="@string/description_dia12"
                         android:elevation="4dp"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="@string/label_12"
                         android:textSize="18sp"
-                        android:contentDescription="Dia 12"
+                        app:layout_constraintRight_toLeftOf="@id/agenda_day13"
                         />
                 
                 <TextView
@@ -189,34 +211,40 @@
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/agenda_day14"
+                        android:layout_toStartOf="@id/agenda_day14"
                         android:background="@drawable/ic_circle_whitesmoke"
                         android:clickable="true"
+                        android:contentDescription="@string/description_dia13"
                         android:elevation="4dp"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center"
-                        android:text="13"
+                        android:text="@string/label_13"
                         android:textSize="18sp"
-                        android:contentDescription="Dia 13"
+                        app:layout_constraintRight_toLeftOf="@id/agenda_day14"
                         />
                 
                 <TextView
                         android:id="@+id/agenda_day14"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/ic_circle_whitesmoke"
                         android:clickable="true"
+                        android:contentDescription="@string/description_dia14"
                         android:elevation="4dp"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center"
-                        android:text="14"
+                        android:text="@string/label_14"
                         android:textSize="18sp"
-                        android:contentDescription="Dia 14"
+                        app:layout_constraintRight_toRightOf="parent"
                         />
-        </LinearLayout >
+        </android.support.constraint.ConstraintLayout >
         
         <android.support.design.widget.TabLayout
                 android:id="@+id/agenda_tabs"

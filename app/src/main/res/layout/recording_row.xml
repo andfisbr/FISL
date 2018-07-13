@@ -10,8 +10,11 @@
                 android:id="@+id/recordingrow_play"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_video_black_24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_recording_download_black_24dp"
                 android:tint="#90A4AE"
                 />
 </RelativeLayout >
