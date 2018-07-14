@@ -1,0 +1,207 @@
+<resources >
+        <string name="app_name" >FISL</string >
+        <string name="lorem_ipsum" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</string >
+        
+        <array name="spinner_filter" >
+                <item >POR HORA</item >
+                <item >POR TRILHA</item >
+        </array >
+        
+        
+        <array name="splash_backgrounds" >
+                <item >@drawable/ic_previous_1</item >
+                <item >@drawable/ic_previous_2</item >
+                <item >@drawable/ic_previous_3</item >
+                <item >@drawable/ic_previous_4</item >
+                <item >@drawable/ic_previous_5</item >
+                <item >@drawable/ic_previous_6</item >
+        </array >
+        
+        
+        <string name="about_app"><![CDATA[
+<h2>FISL2018 :: App oficial do 18º Fórum Internacional de Software Livre</h2>
+<p>O aplicativo foi construído com a finalidade de facilitar a consulta na agenda do evento.</p>
+<br>
+<h3>Características</h3>
+<p>
+<b>*</b> Informações básicas sobre o evento<br>
+<b>*</b> Navegação pela agenda do evento<br>
+<b>*</b> Informações mais detalhadas sobre as palestras e palestrantes<br>
+<b>*</b> Possibilidade de filtrar a agenda por TRILHA, PALESTRANTE ou TÍTULO<br>
+<b>*</b> Aviso através de notificações das palestras que você deseja assistir<br>
+</p>
+<p>Quanto as bibliotecas utilizadas, o app utiliza as básicas de desenvolvimento fornecidas pelo Google e Fabric.io e bibliotecas "open source" encontradas no GitHub.</p>
+<br>
+<br>
+<p>O aplicativo foi feito em tempo record, por isso contempla somente a navegação na agenda. Para o próximo FISL, novas características serão implementadas. Sugestões são bem-vindas.</p>
+
+<br>
+<br>
+<br>
+<h3>Licenciamento</h3>
+<p>
+MIT License<br>
+<br>
+Copyright © 2018 André Fischer<br>
+<br>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+<br>
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+<br>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+
+        ]]></string>
+        
+        
+        
+        
+        <string name="about" ><![CDATA[
+<h3>18 anos fortalecendo o conhecimento colaborativo e construindo tecnologias livres.</h3>
+<p>A cada ano, o Fórum Internacional de software livre tem se estabelecido como um lugar para discussão e exposição das principais inovações em tecnologias livres.</p>
+<p>Desde a primeira edição, FISL tem como o principal valor "a tecnologia que liberta", incentivando a manutenção da transparência na tecnologia, seja em códigos, padrões abertos, compartilhamento de conhecimento e da luta pela Internet livre e neutra.</p>
+<p>Em 2018 o fisl será novamente o palco da maior reunião de comunidades de software livre no mundo. Juntos, vamos compartilhar conhecimentos e inovações, renovar conexões com as comunidades, participar do sistema de tecnologias livres e abertas, mas também preocupações em busca de nosso objetivo comum: construir uma humanidade mais justa, colaborativa e com conhecimento livre.</p>
+<br>
+<br>
+<h3>Por que ir</h3>
+<p>Software livre está presente em negócios, ecommerce, educação, a Web, dispositivos móveis, infraestrututa-lo e em tantos outros aspectos da vida moderna.</p>
+<p>Portanto, é importante saber quais tecnologias se integram melhor umas com as outras, já que os projetos de código aberto que você usa são desenvolvidos e suportados e por quem e entender sobre licenciamento. Nos quatro dias do FISL você encontra:</p>
+<br>*</br> Técnicas para escrever o melhor código</li>
+<br>*</br> Vantagens do uso de software você pode ter acesso ao código e modificar se necessário</li>
+<br>*</br> Como aderir a uma comunidade</li>
+<br>*</br> Como migrar de instalações comerciais dispendiosas para soluções de código aberto mais eficientes e rentáveis</li>
+<br>*</br> Inovações na administração do sistema e redes que sua organização pode começar a usar imediatamente para aumentar a eficiência</li>
+<br>*</br> Conhecimento para garantir que seu código é realmente seguro</li>
+<br>*</br> Técnicas fundamentais e dicas avançadas para dimensionar e otimizar seus sistemas de economia de tempo</li>
+<br>*</br> técnicas para aumentar a produtividade e reduzir o custo de implantação, a partir de bases de dados para computação em nuvem</li>
+<br>*</br> Projectos promissores, serviços, línguas e ferramentas</li>
+<br>*</br> Tópicos atualizados como Big Data, internet das coisas, computação em nuvem, inteligência artificial, robótica, entre outros.</li>
+<br>
+<br>
+
+<h3>Quem faz o FISL</h3>
+<p>
+COORDENAÇÃO GERAL<br>
+<b>*</b> Coordenadores: Sady Jacques, Ricardo Fritsch e Clarisse Abrahão<br>
+<b>*</b> Secretaria Executiva: Luiz Vicente Basso<br>
+<b>*</b> Secretária: Aline Peres<br>
+<br>
+<br>
+GRUPOS DE TRABALHO<br>
+<b>*</b> Coord. GT Captação: Ricardo Fritsch<br>
+<b>*</b> Coord. GT Temário: Daniel Muller<br>
+<b>*</b> Coord. GT Web: Alexandre Thomé<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Conteúdos: Aline Peres<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvimento WebSite atual: Luciano Lourenço Maddrum e Fabrício Reis<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvimento WebSite anterior: Clovis Euzebio Schimitz Beccon Junior e Thiago Paixão<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Web Designer: Luciano Lourenço Maddrum<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;<b>-</b> Desenvolvedor APP da agenda: André Fischer<br>
+<b>*</b> Coord. GT Páginas Amigas: Oscar Luz<br>
+<b>*</b> Coord. GT Fislinho: Carlos Castro<br>
+<b>*</b> Coord. GT Acessibilidade: José Francisco<br>
+<b>*</b> Coord. GT Comunicação: João Fernando C. Jr.<br>
+<b>*</b> Coord. GT Comunidades: Thiago Paixão<br>
+<b>*</b> Coord. GT Cultura: Lucas Alberto<br>
+<b>*</b> Coord. GT Educação: Clarisse Abrahão<br>
+<b>*</b> Coord. GT Empreendedorismo: Fabrício Reis<br>
+<b>*</b> Coord. GT Games: Leandro Piccini<br>
+<b>*</b> Coord. GT Infra: Thomas Soares<br>
+<b>*</b> Coord. GT Inscrições:<br>
+<b>*</b> Coord. GT Mobile/IOT:<br>
+<b>*</b> Coord. GT Mulheres: Rafaela Melo<br>
+<b>*</b> Coord. GT RISoL: Laura Marotias<br>
+<b>*</b> Coord. GT Robótica: Eloir Rockenbach<br>
+<b>*</b> Coord. GT Setor Público: Sady Jacques<br>
+<b>*</b> Coord. GT Traduções: Aline Peres<br>
+<b>*</b> Coord. GT Turismo: Aline Peres<br>
+<b>*</b> Coord. GT Voluntários: Junior Goergen<br>
+<b>*</b> Coord. GT WSL: Cláudia Archer<br>
+<br>
+<br>
+OUTROS CONTATOS<br>
+<b>*</b> Inscrições, empenhos e pagamentos: inscricoes ARROBA asl PONTO org PONTO br<br>
+<br>
+<br>
+ASSESSORIAS<br>
+<br>
+<strong>Agência de Eventos</strong><br>
+LB Produções e Eventos<br>
+Fone: (51) 3093-2777 – (51) 3094-2777<br>
+E-mail: fisl ARROBA luizbasso PONTO com PONTO br<br>
+<br>
+<br>
+<strong>Assessoria Contábil</strong><br>
+Espaço de Projetos<br>
+Fone: (51) 3029-9398<br>
+E-mail: fisl ARROBA espacodeprojetos PONTO com PONTO br<br>
+<br>
+<br>
+<strong>Designer</strong><br>
+Luciano Lourenço Maddrum<br>
+E-mail: maddrum ARROBA gmail PONTO com<br>
+<br>
+<br>
+<strong>Infra-estrutura e TV Software Livre</strong><br>
+Solis – Cooperativa de Soluções Livres<br>
+Fone: (51) 3714-6653<br>
+E-mail: comercial ARROBA solis PONTO coop PONTO br<br>
+</p>
+]]>
+        </string >
+        
+        
+        
+        
+        <string name="about_dev"><![CDATA[
+<h3>André Fischer</h3>
+<p>Desenvolvedor do app FISL</p>
+<br>
+<br>
+<p>Analista de suporte da PROCERGS que, entre outras diversas atividades (marido, pai, filhas, hapkido, instrutor, truques com cartas, violão, etc.), ainda é entusiasta do desenvolvimento Android.</p>
+<p>Já possui alguns aplicativos publicados que facilitam muito o dia a dia de quem os usa - destaque para o GrünenKarte e o JáPassou?.</p>
+]]>
+        </string>
+        
+        
+        
+        
+        <string name="description_back" >Voltar</string >
+        <string name="description_search_autocomplete" >Digite uma trilha, título, palestrante ou sala.</string >
+        <string name="description_search" >Procurar. Utilize a caixa a esquerda para a procura.</string >
+        <string name="description_notifications" >Notificações sobre as palestras.</string >
+        <string name="description_dia11" >Dia 11</string >
+        <string name="description_dia12" >Dia 12</string >
+        <string name="description_dia13" >Dia 13</string >
+        <string name="description_dia14" >Dia 14</string >
+        <string name="description_dev" >André Fischer</string >
+        <string name="description_menu" >Menu</string >
+        <string name="description_sponsors" >Patrocinadores</string >
+        <string name="description_agenda" >Agenda do evento</string >
+        <string name="description_notification_delete" >Excluir notificação</string >
+        <string name="description_notification_add" >Adicionar notificação</string >
+        <string name="description_filterby_owner" >Clique-me para filtrar pelo palestrante</string >
+        <string name="description_filterby_track" >Clique-me para filtrar pela trilha</string >
+
+        <string name="label_agenda" >AGENDA</string >
+        <string name="label_search_autocomplete" >trilha, título, palestrante ou sala</string >
+        <string name="label_rooms_without_talks" >mostrar salas sem palestras</string >
+        <string name="label_11" >11</string >
+        <string name="label_12" >12</string >
+        <string name="label_13" >13</string >
+        <string name="label_14" >14</string >
+        <string name="label_about" >SOBRE</string >
+        <string name="label_dots" >…</string >
+        <string name="label_version" >1.0.0</string >
+        <string name="label_notifications" >NOTIFICAÇÕES</string >
+        <string name="label_social" >social</string >
+        <string name="label_fisl" >FISL</string >
+        <string name="label_year" >18</string >
+        <string name="label_forum" >18º Fórum Internacional</string >
+        <string name="label_software_livre" >SOFTWARE LIVRE</string >
+        <string name="label_slogan" >A tecnologia que liberta</string >
+        <string name="label_track" >Trilha</string >
+        <string name="label_owners" >Autor(es)</string >
+        <string name="label_when" >Apresentação</string >
+        <string name="label_description" >Descrição</string >
+        <string name="label_no_recordings" >sem gravações</string >
+</resources >

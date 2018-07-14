@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        >
+        
+        <TextView
+                android:id="@+id/na_exp_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Hora"
+                />
+        
+        
+        <TextView
+                android:id="@+id/na_exp_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/na_exp_hour"
+                android:layout_toRightOf="@id/na_exp_hour"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="14sp"
+                tools:text="Data"
+                />
+        
+        
+        <TextView
+                android:id="@+id/na_exp_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/na_exp_date"
+                android:layout_toRightOf="@id/na_exp_date"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Sala"
+                />
+        
+        <TextView
+                android:id="@+id/na_exp_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/na_exp_hour"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="14sp"
+                tools:text="Título"
+                />
+        
+        
+        <TextView
+                android:id="@+id/na_exp_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/na_exp_title"
+                android:fontFamily="sans-serif-condensed"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                tools:text="Palestrante"
+                android:layout_alignParentRight="true"
+                android:gravity="right|end"
+                android:layout_alignParentEnd="true"
+                />
+        
+        
+        <TextView
+                android:id="@+id/na_exp_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/na_exp_owner"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Trilha"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:gravity="right|end"
+                android:layout_alignParentEnd="true"
+                />
+
+
+</RelativeLayout >

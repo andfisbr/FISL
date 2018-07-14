@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        tools:targetApi="lollipop"
+        >
+        
+        
+        <ImageView
+                android:id="@+id/main_banner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_banner_background"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        
+        <ImageView
+                android:id="@+id/main_menu"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="@string/description_menu"
+                android:padding="4dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_menu_black_24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        
+        
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="56dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                
+                <TextView
+                        android:id="@+id/main_fisl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_fisl"
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_year"
+                        android:textColor="#5B7A7A"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/main_fisl"
+                        app:layout_constraintLeft_toRightOf="@+id/main_fisl"
+                        app:layout_constraintTop_toTopOf="@+id/main_fisl"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_forum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_forum"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_software"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_software_livre"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl_forum"
+                        />
+                
+                <TextView
+                        android:id="@+id/main_fisl_tecnologia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_slogan"
+                        android:textColor="#5B7A7A"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_fisl_software"
+                        />
+        </android.support.constraint.ConstraintLayout >
+        
+        
+        <View
+                android:id="@+id/main_divider"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                app:layout_constraintTop_toBottomOf="@+id/main_banner"
+                />
+        
+        
+        <ImageView
+                android:id="@+id/main_background"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_logo_piece"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_calendar_button"
+                />
+        
+        
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#ddffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_banner"
+                />
+        
+        
+        <WebView
+                android:id="@+id/main_about"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbarStyle="outsideOverlay"
+                app:layout_constraintBottom_toTopOf="@+id/main_sponsors_container"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_banner"
+                />
+        
+        
+        <ScrollView
+                android:id="@+id/main_about_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbarStyle="outsideOverlay"
+                app:layout_constraintBottom_toTopOf="@+id/main_sponsors_container"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_banner"
+                >
+                
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="16dp"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/main_about2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp"
+                                android:text="@string/lorem_ipsum"
+                                android:textSize="18sp"
+                                android:visibility="gone"
+                                />
+                
+                </LinearLayout >
+        </ScrollView >
+        
+        
+        <RelativeLayout
+                android:id="@+id/main_sponsors_container"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+                
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/main_sponsors_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/sponsor_row"
+                        android:contentDescription="@string/description_sponsors"
+                        />
+        </RelativeLayout >
+        
+        
+        <include layout="@layout/app_progress" />
+        
+        
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/main_calendar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="@string/description_agenda"
+                android:src="@drawable/ic_calendar_clock_black_24dp"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/main_divider"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/main_divider"
+                />
+
+
+</android.support.constraint.ConstraintLayout >

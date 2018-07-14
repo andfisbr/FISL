@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        >
+        
+        <TextView
+                android:id="@+id/na_col_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Hora"
+                />
+        
+        <TextView
+                android:id="@+id/na_col_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/na_col_hour"
+                android:layout_toRightOf="@id/na_col_hour"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="12sp"
+                tools:text="Data"
+                />
+        
+        <TextView
+                android:id="@+id/na_col_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/na_col_date"
+                android:layout_toRightOf="@id/na_col_date"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Sala"
+                />
+        
+        <TextView
+                android:id="@+id/na_col_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/na_col_hour"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="12sp"
+                tools:text="Título"
+                />
+
+
+</RelativeLayout >

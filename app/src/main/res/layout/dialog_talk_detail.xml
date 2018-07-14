@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        
+        <TextView
+                android:id="@+id/dsd_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow_900"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Title"
+                />
+        
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dsd_title"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:scrollbarStyle="outsideOverlay"
+                >
+                
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                />
+                        
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_track"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_track"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:textSize="18sp"
+                                tools:text="Qual é a categoria do título"
+                                />
+                        
+                        
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/label_owners"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_owner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:textSize="18sp"
+                                tools:text="Nome completo do palestrante\nCurrículo"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_coauthor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="4dp"
+                                android:textSize="18sp"
+                                android:visibility="gone"
+                                tools:text="Nome completo do coautor\nCurrículo"
+                                />
+                        
+                        
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/label_when"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_local"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                android:textSize="18sp"
+                                tools:text="dia e local da palestra com o tempo de duração"
+                                />
+                        
+                        
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/label_description"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                />
+                        
+                        <TextView
+                                android:id="@+id/dsd_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="16dp"
+                                tools:text="informação da palestra"
+                                android:textSize="18sp"
+                                />
+                        
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                />
+                </LinearLayout >
+        </ScrollView >
+</RelativeLayout >

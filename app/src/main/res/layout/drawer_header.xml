@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/ic_drawer_background"
+        android:contentDescription="@null"
+        >
+        
+        <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
+                android:src="@drawable/ic_launcher_144"
+                android:contentDescription="@null"
+                />
+</RelativeLayout >
+
